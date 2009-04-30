@@ -1,6 +1,8 @@
 <?php 
 class UNL_Services_CourseApproval_XCRIService_creq implements UNL_Services_CourseApproval_XCRIService
 {
+    const URL = 'http://creq.unl.edu/courses/public-view/all-courses';
+    
     /**
      * The caching service.
      * 
@@ -15,12 +17,12 @@ class UNL_Services_CourseApproval_XCRIService_creq implements UNL_Services_Cours
     
     function getAllCourses()
     {
-        return $this->_getData('creq_allcourses', 'http://creq.unl.edu/courses/public-view/all-courses');
+        return $this->_getData('creq_allcourses', self::URL);
     }
     
     function getSubjectArea($subjectarea)
     {
-        return $this->_getData('creq_subject_'.$subjectarea, 'http://creq.unl.edu/courses/public-view/all-courses/subject/'.$subjectarea);
+        return $this->_getData('creq_subject_'.$subjectarea, self::URL.'/subject/'.$subjectarea);
     }
     
     protected function _getData($key, $url)
