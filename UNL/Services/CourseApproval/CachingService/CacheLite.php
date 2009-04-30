@@ -5,7 +5,10 @@ class UNL_Services_CourseApproval_CachingService_CacheLite implements UNL_Servic
     
     function __construct()
     {
-        require_once 'Cache/Lite.php';
+        @include_once 'Cache/Lite.php';
+        if (!class_exists('Cache_Lite')) {
+            throw new Exception('Unable to include Cache_Lite, is it installed?');
+        }
         $options = array('lifeTime'=>604800); //one week lifetime
         $this->cache = new Cache_Lite();
     }

@@ -23,7 +23,11 @@ class UNL_Services_CourseApproval
     public static function getCachingService()
     {
         if (!isset(self::$_cache)) {
-            self::setCachingService(new UNL_Services_CourseApproval_CachingService_CacheLite());
+            try {
+                self::setCachingService(new UNL_Services_CourseApproval_CachingService_CacheLite());
+            } catch(Exception $e) {
+                self::setCachingService(new UNL_Services_CourseApproval_CachingService_Null());
+            }
         }
         
         return self::$_cache;
