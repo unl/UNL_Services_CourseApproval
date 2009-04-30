@@ -1,0 +1,10 @@
+This project provides a simple API for the course data within the creq system
+built by Tim Steiner.
+
+This project requires the UNL_Autoload package, and optionally Cache_Lite for
+caching data from the creq system.
+
+Currently data is cached on the local system in /tmp/cache_* files and stored
+for one week.
+
+See the docs/examples/ directory for examples.
