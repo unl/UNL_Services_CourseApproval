@@ -7,6 +7,9 @@ require_once 'UNL/Autoload.php';
 @include_once 'Text/Diff/Renderer/unified.php';
 chdir(dirname(dirname(__FILE__)));
 
+UNL_Services_CourseApproval::setCachingService(new UNL_Services_CourseApproval_CachingService_Null());
+UNL_Services_CourseApproval::setXCRIService(new UNL_Services_CourseApproval_XCRIService_MockService());
+
 error_reporting($__e);
 class PEAR2_PHPT
 {
