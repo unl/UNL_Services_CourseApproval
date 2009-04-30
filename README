@@ -8,3 +8,6 @@ Currently data is cached on the local system in /tmp/cache_* files and stored
 for one week.
 
 See the docs/examples/ directory for examples.
+
+For information on the XML format, see the XSD -
+http://courseapproval.unl.edu/schema/courses.xsd
