@@ -11,7 +11,8 @@ class UNL_Services_CourseApproval_Course
     
     public $codes;
     
-    protected $_getMap = array('credits'=>'getCredits');
+    protected $_getMap = array('credits'=>'getCredits',
+                               'dfRemoval'=>'getDFRemoval');
     
     function __construct(SimpleXMLElement $xml)
     {
@@ -46,6 +47,15 @@ class UNL_Services_CourseApproval_Course
     function getCredits()
     {
         return new UNL_Services_CourseApproval_Course_Credits($this->_internal->credits->children());
+    }
+    
+    function getDFRemoval()
+    {
+        if ($this->_internal->dfRemoval == 'true') {
+            return true;
+        }
+        
+        return false;
     }
     
     public static function courseNumberFromCourseCode(SimpleXMLElement $xml)

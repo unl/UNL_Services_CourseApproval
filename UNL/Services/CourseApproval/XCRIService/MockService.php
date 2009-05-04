@@ -216,7 +216,61 @@ ACCT;
   </course>
 AECN;
         $this->mock_data['CSCE'] = <<<CSCE
-<course>
+  <course>
+    <title>Introduction to Problem Solving with Computers</title>
+    <courseCodes>
+      <courseCode type="home listing">
+        <subject>CSCE</subject>
+        <courseNumber>150</courseNumber>
+        <courseLetter>A</courseLetter>
+
+      </courseCode>
+    </courseCodes>
+    <gradingType>unrestricted</gradingType>
+    <dfRemoval>true</dfRemoval>
+    <effectiveSemester>20083</effectiveSemester>
+    <prerequisite>
+      <div xmlns="http://www.w3.org/1999/xhtml">Four years high school mathematics.</div>
+
+    </prerequisite>
+    <notes>
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <em>CSCE 150A is designed to develop skills in programming and problem solving to prepare for CSCE 155.</em>
+        <em>CSCE 150A will not count toward the requirements for the major in computer science and computer engineering. </em>
+        <em>
+          <em>Credit towards the degree may be earned in only one of: CSCE 150A or CSCE 150E or CSCE 150M or CSCE 252A.</em>
+
+        </em>
+      </div>
+    </notes>
+    <description>
+      <div xmlns="http://www.w3.org/1999/xhtml">Problem solving with a computer and programming fundamentals using a popular high-level language. Logic and functions that apply to computer science; elementary programming constructs, type, and algorithmic techniques.</div>
+    </description>
+    <campuses>
+      <campus>UNL</campus>
+
+    </campuses>
+    <deliveryMethods>
+      <deliveryMethod>Classroom</deliveryMethod>
+    </deliveryMethods>
+    <termsOffered>
+      <term>Fall</term>
+      <term>Spring</term>
+
+      <term>Summer</term>
+    </termsOffered>
+    <activities>
+      <activity>
+        <type>lec</type>
+        <hours>3</hours>
+      </activity>
+
+    </activities>
+    <credits>
+      <credit type="Single Value">3</credit>
+    </credits>
+  </course>
+  <course>
     <title>Special Topics in Computer Science</title>
     <courseCodes>
       <courseCode type="home listing">
