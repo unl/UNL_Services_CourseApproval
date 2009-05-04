@@ -11,6 +11,8 @@ class UNL_Services_CourseApproval_Course
     
     public $codes;
     
+    protected $_getMap = array('credits'=>'getCredits');
+    
     function __construct(SimpleXMLElement $xml)
     {
         $this->_internal = $xml;
@@ -27,6 +29,10 @@ class UNL_Services_CourseApproval_Course
     
     function __get($var)
     {
+        if (array_key_exists($var, $this->_getMap)) {
+            return $this->{$this->_getMap[$var]}();
+        }
+        
         if ($this->_internal->$var->children()) {
             $string = '';
             foreach ($this->_internal->$var->children() as $el) {
@@ -35,6 +41,11 @@ class UNL_Services_CourseApproval_Course
             return $string;
         }
         return (string)$this->_internal->$var;
+    }
+    
+    function getCredits()
+    {
+        return new UNL_Services_CourseApproval_Course_Credits($this->_internal->credits->children());
     }
     
     public static function courseNumberFromCourseCode(SimpleXMLElement $xml)

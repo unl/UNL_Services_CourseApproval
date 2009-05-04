@@ -31,10 +31,15 @@ foreach ($subject->courses as $course) {
         $listings .= $listing->courseNumber.'/';
     }
     $listings = trim($listings, '/');
-       
+    
+    $credits = '';
+    if (isset($course->credits['Single Value'])) {
+        $credits = $course->credits['Single Value'];
+    }
+    
     echo "<dt class='course'>
             <span class='number'>$listings</span>. <span class='title'>{$course->title}</span>
-            <span class='credit'>({$course->credits} cr)</span>
+            <span class='credit'>($credits cr)</span>
           </dt>
           <dd>";
     if (!empty($course->prerequisite)) {

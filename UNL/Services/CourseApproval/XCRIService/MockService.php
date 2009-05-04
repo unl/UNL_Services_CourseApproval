@@ -215,6 +215,47 @@ ACCT;
     </aceOutcomes>
   </course>
 AECN;
+        $this->mock_data['CSCE'] = <<<CSCE
+<course>
+    <title>Special Topics in Computer Science</title>
+    <courseCodes>
+      <courseCode type="home listing">
+        <subject>CSCE</subject>
+        <courseNumber>196</courseNumber>
+
+      </courseCode>
+    </courseCodes>
+    <gradingType>unrestricted</gradingType>
+    <dfRemoval>false</dfRemoval>
+    <effectiveSemester>20081</effectiveSemester>
+    <prerequisite>
+      <div xmlns="http://www.w3.org/1999/xhtml">Permission.</div>
+
+    </prerequisite>
+    <description>
+      <div xmlns="http://www.w3.org/1999/xhtml">Aspects of computers and computing for computer science and computer engineering majors and minors. Topics vary.</div>
+    </description>
+    <campuses>
+      <campus>UNL</campus>
+    </campuses>
+    <deliveryMethods>
+
+      <deliveryMethod>Classroom</deliveryMethod>
+    </deliveryMethods>
+    <termsOffered>
+      <term>Fall</term>
+      <term>Spring</term>
+      <term>Summer</term>
+    </termsOffered>
+
+    <activities/>
+    <credits>
+      <credit type="Lower Range Limit">1</credit>
+      <credit type="Upper Range Limit">3</credit>
+      <credit type="Per Semester Limit">6</credit>
+    </credits>
+  </course>
+CSCE;
     }
     
     function getAllCourses()
