@@ -44,11 +44,21 @@ class UNL_Services_CourseApproval_Course
         return (string)$this->_internal->$var;
     }
     
+    /**
+     * Gets the types of credits offered for this course.
+     * 
+     * @return UNL_Services_CourseApproval_Course_Credits
+     */
     function getCredits()
     {
         return new UNL_Services_CourseApproval_Course_Credits($this->_internal->credits->children());
     }
     
+    /**
+     * Checks whether this course can remove a previous grade of D or F for the same course.
+     * 
+     * @return bool
+     */
     function getDFRemoval()
     {
         if ($this->_internal->dfRemoval == 'true') {
