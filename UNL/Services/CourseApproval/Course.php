@@ -11,8 +11,14 @@ class UNL_Services_CourseApproval_Course
     
     public $codes;
     
-    protected $_getMap = array('credits'=>'getCredits',
-                               'dfRemoval'=>'getDFRemoval');
+    protected $_getMap = array('credits'         => 'getCredits',
+                               'dfRemoval'       => 'getDFRemoval',
+                               'campuses'        => 'getCampuses',
+                               'deliveryMethods' => 'getDeliveryMethods',
+                               'termsOffered'    => 'getTermsOffered',
+                               'activities'      => 'getActivities',
+                               'aceOutcomes'     => 'getACEOutcomes',
+                               );
     
     function __construct(SimpleXMLElement $xml)
     {
@@ -42,6 +48,40 @@ class UNL_Services_CourseApproval_Course
             return $string;
         }
         return (string)$this->_internal->$var;
+    }
+    
+    function getCampuses()
+    {
+        return $this->getArray('campuses');
+    }
+    
+    function getTermsOffered()
+    {
+        return $this->getArray('termsOffered');
+    }
+    
+    function getDeliveryMethods()
+    {
+        return $this->getArray('deliveryMethods');
+    }
+    
+    function getActivities()
+    {
+        return new UNL_Services_CourseApproval_Course_Activities($this->_internal->activities->children());
+    }
+    
+    function getACEOutcomes()
+    {
+        return $this->getArray('aceOutcomes');
+    }
+    
+    function getArray($var)
+    {
+        $results = array();
+        foreach ($this->_internal->$var->children() as $el) {
+            $results[] = (string)$el;
+        }
+        return $results;
     }
     
     /**
