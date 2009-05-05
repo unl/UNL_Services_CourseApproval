@@ -8,17 +8,21 @@ $page = UNL_Templates::factory('Fixed');
 $page->addStyleDeclaration('
 .course .number {font-size:2.5em;padding:7px 2px;margin:0 5px 0 0;background-color:#E7F0F9;display:block; float:left;font-weight:bold;}
 .course .title {font-size:1.5em; display:block; border-bottom:1px solid #C8C8C8;font-style:normal;font-weight:bold;}
-.course .prereqs {color:#0F900A;font-weight:bold;margin:3px 0;}
-.course .notes {font-style:italic;margin:3px 0;}
+.course .prereqs {color:#0F900A;font-weight:bold;margin:4px 0;}
+.course .notes {font-style:italic;margin:4px 0;}
 .course .details {float:right;width:220px;}
 .course .description {border-left:3px solid #C8C8C8;padding-left:5px;float:left;width:440px;}
-dd {margin:0 0 3em 0;padding:0;}
+dd {margin:0 0 3em 0;padding-left:0 !important;}
 dt {padding:3em 0 0 0 !important;}
 .course {clear:both;}
 ');
 
 $page->titlegraphic = '<h1>Undergraduate Bulletin</h1>
                        <h2>Your Academic Guide</h2>';
+$page->doctitle = '<title>UNL | Undergraduate Bulletin</title>';
+$page->breadcrumbs = '<ul>
+    <li><a href="http://www.unl.edu/">UNL</a></li>
+    <li>Undergraduate Bulletin</li></ul>';
 $page->navlinks = '
 <ul>
     <li>Academic Policies</li>
