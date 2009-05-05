@@ -77,6 +77,40 @@ foreach ($subject->courses as $course) {
         $credits = $course->credits['Single Value'];
     }
     
+    $format = '';
+    foreach ($course->activities as $type=>$activity) {
+        switch ($type) {
+            case 'lec':
+                $format .= 'Lecture';
+                break;
+            case 'lab':
+                $format .= 'Lab';
+                break;
+            case 'quz':
+                $format .= 'Quiz';
+                break;
+            case 'rct':
+                $format .= 'Recitation';
+                break;
+            case 'stu':
+                $format .= 'Studio';
+                break;
+            case 'fld':
+                $format .= 'Field';
+                break;
+            case 'ind':
+                $format .= 'Independent Study';
+                break;
+            case 'psi':
+                $format .= 'Personalized System of Instruction';
+                break;
+            default:
+                break;
+        }
+        $format .= ' '.$activity->hours.', ';
+    }
+    $format = trim($format, ', ');
+    
     $page->maincontentarea .= "
         <dt class='course'>
             <span class='subjectCode'>{$subject->subject}</span>
@@ -94,7 +128,7 @@ foreach ($subject->courses as $course) {
                                     </tr>';
         $page->maincontentarea .= '<tr class="format alt">
                                     <td class="label">Course Format:</td>
-                                    <td class="value"></td>
+                                    <td class="value">'.$format.'</td>
                                     </tr>';
         $page->maincontentarea .= '<tr class="campus">
                                     <td class="label">Campus:</td>
