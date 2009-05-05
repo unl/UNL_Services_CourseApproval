@@ -9,16 +9,22 @@ $page->addStyleDeclaration('
 .course .subjectCode {background-color:#E7F0F9;margin-bottom:-1px;color:#818489;display:block;float:left;min-width:85px;text-align:center;}
 .course .number {font-size:2.5em;padding:7px 0px;margin:0 5px 0 0;background-color:#E7F0F9;display:block;clear:left;float:left;font-weight:bold;min-width:85px;text-align:center;}
 .course .title {font-size:1.5em; display:block; border-bottom:1px solid #C8C8C8;font-style:normal;font-weight:bold;margin-left:95px;}
-.course .crosslistings {margin:4px 0;}
+.course .crosslistings {margin:4px 0 4px 95px;}
 .course .crosslistings .crosslisting {font-size:1em;color:#C60203;background:none;}
-.course .prereqs {color:#0F900A;font-weight:bold;margin:4px 0;}
-.course .notes {font-style:italic;margin:4px 0;}
-.course .details {float:right;width:220px;border-collapse:collapse;}
+
+.course .prereqs,
+.course .notes,
+.course .description {margin:4px 0;float:left;width:450px;}
+
+.course .prereqs {color:#0F900A;font-weight:bold;}
+.course .notes {font-style:italic;}
+.course .description {border-left:3px solid #C8C8C8;padding-left:5px;}
+
+.course .details {width:220px;border-collapse:collapse;right:0px;float:right;}
 .course .details td {border-bottom:1px solid #C9E2F6;background-color:#E3F0FF;}
 .course .details .label {font-weight:bold;}
 .course .details .value {text-align:right;}
-.course .description {border-left:3px solid #C8C8C8;padding-left:5px;float:left;width:440px;}
-dd {margin:0 0 3em 0;padding-left:0 !important;}
+dd {margin:0 0 3em 0;padding-left:0 !important;position:relative;overflow:hidden;}
 dt {padding:3em 0 0 0 !important;}
 .course {clear:both;}
 ');
@@ -74,21 +80,12 @@ foreach ($subject->courses as $course) {
         <dt class='course'>
             <span class='subjectCode'>{$subject->subject}</span>
             <span class='number'>$listings</span>
-            <span class='title'>{$course->title}</span>
-        </dt>
-        <dd class='course'>";
+            <span class='title'>{$course->title}</span>";
         if (!empty($crosslistings)) {
             $page->maincontentarea .= '<p class="crosslistings">Crosslisted as '.$crosslistings.'</p>';
         }
-        $prereqs = @$course->prerequisite;
-        if (!empty($prereqs)) {
-            $page->maincontentarea .= "<p class='prereqs'>Prereqs: {$prereqs}</p>";
-        }
-        $notes = @$course->notes;
-        if (!empty($notes)) {
-            $page->maincontentarea .= "<p class='notes'>{$notes}</p>";
-        }
-        $page->maincontentarea .= "<p class='description'>{$course->description}</p>";
+        $page->maincontentarea .= "</dt>
+        <dd class='course'>";
         $page->maincontentarea .= '<table class="details">';
         $page->maincontentarea .= '<tr class="credits">
                                     <td class="label">Credit Hours:</td>
@@ -116,6 +113,16 @@ foreach ($subject->courses as $course) {
                                     <td class="value">'.implode(', ', $ace).'</td>
                                     </tr>';
         $page->maincontentarea .= '</table>';
+        $prereqs = @$course->prerequisite;
+        if (!empty($prereqs)) {
+            $page->maincontentarea .= "<p class='prereqs'>Prereqs: {$prereqs}</p>";
+        }
+        $notes = @$course->notes;
+        if (!empty($notes)) {
+            $page->maincontentarea .= "<p class='notes'>{$notes}</p>";
+        }
+        $page->maincontentarea .= "<p class='description'>{$course->description}</p>";
+        
     $page->maincontentarea .= "</dd>";
 }
 $page->maincontentarea .= '</dl>';
