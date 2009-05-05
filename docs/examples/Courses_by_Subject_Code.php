@@ -9,7 +9,7 @@ $page->addStyleDeclaration('
 .course .subjectCode {background-color:#E7F0F9;margin-bottom:-1px;color:#818489;display:block;float:left;min-width:85px;text-align:center;}
 .course .number {font-size:2.5em;padding:7px 0px;margin:0 5px 0 0;background-color:#E7F0F9;display:block;clear:left;float:left;font-weight:bold;min-width:85px;text-align:center;}
 .course .title {font-size:1.5em; display:block; border-bottom:1px solid #C8C8C8;font-style:normal;font-weight:bold;margin-left:95px;}
-.course .crosslistings {margin:4px 0 4px 95px;}
+.course .crosslistings {margin:4px 0 4px 95px;display:block;}
 .course .crosslistings .crosslisting {font-size:1em;color:#C60203;background:none;}
 
 .course .prereqs,
@@ -82,7 +82,7 @@ foreach ($subject->courses as $course) {
             <span class='number'>$listings</span>
             <span class='title'>{$course->title}</span>";
         if (!empty($crosslistings)) {
-            $page->maincontentarea .= '<p class="crosslistings">Crosslisted as '.$crosslistings.'</p>';
+            $page->maincontentarea .= '<span class="crosslistings">Crosslisted as '.$crosslistings.'</span>';
         }
         $page->maincontentarea .= "</dt>
         <dd class='course'>";
