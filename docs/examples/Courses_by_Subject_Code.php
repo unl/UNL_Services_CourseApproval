@@ -21,7 +21,8 @@ $page->addStyleDeclaration('
 .course .description {border-left:3px solid #C8C8C8;padding-left:5px;}
 
 .course .details {width:220px;border-collapse:collapse;right:0px;float:right;}
-.course .details td {border-bottom:1px solid #C9E2F6;background-color:#E3F0FF;}
+.course .details tr.alt td {border:1px solid #C9E2F6;border-right:none;border-left:none;background-color:#E3F0FF;}
+.course .details td {}
 .course .details .label {font-weight:bold;}
 .course .details .value {text-align:right;}
 dd {margin:0 0 3em 0;padding-left:0 !important;position:relative;overflow:hidden;}
@@ -91,7 +92,7 @@ foreach ($subject->courses as $course) {
                                     <td class="label">Credit Hours:</td>
                                     <td class="value">'.$credits.'</td>
                                     </tr>';
-        $page->maincontentarea .= '<tr class="format">
+        $page->maincontentarea .= '<tr class="format alt">
                                     <td class="label">Course Format:</td>
                                     <td class="value"></td>
                                     </tr>';
@@ -99,7 +100,7 @@ foreach ($subject->courses as $course) {
                                     <td class="label">Campus:</td>
                                     <td class="value">'.implode(', ', $course->campuses).'</td>
                                     </tr>';
-        $page->maincontentarea .= '<tr class="termsOffered">
+        $page->maincontentarea .= '<tr class="termsOffered alt">
                                     <td class="label">Terms Offered:</td>
                                     <td class="value">'.implode(', ', $course->termsOffered).'</td>
                                     </tr>';
@@ -108,7 +109,7 @@ foreach ($subject->courses as $course) {
                                     <td class="value">'.implode(', ', $course->deliveryMethods).'</td>
                                     </tr>';
         $ace = @$course->aceOutcomes;
-        $page->maincontentarea .= '<tr class="aceOutcomes">
+        $page->maincontentarea .= '<tr class="aceOutcomes alt">
                                     <td class="label">ACE Outcomes:</td>
                                     <td class="value">'.implode(', ', $ace).'</td>
                                     </tr>';
