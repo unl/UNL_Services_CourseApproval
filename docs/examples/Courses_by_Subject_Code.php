@@ -105,6 +105,7 @@ foreach ($subject->courses as $course) {
                 $format .= 'Personalized System of Instruction';
                 break;
             default:
+                throw new Exception('Unknown activity type! '.$type);
                 break;
         }
         $format .= ' '.$activity->hours.', ';
@@ -142,19 +143,21 @@ foreach ($subject->courses as $course) {
                                     <td class="label">Course Delivery:</td>
                                     <td class="value">'.implode(', ', $course->deliveryMethods).'</td>
                                     </tr>';
-        $ace = @$course->aceOutcomes;
+        $ace = '';
+        if (!empty($course->aceOutcomes)) {
+            $ace = implode(', ', $course->aceOutcomes);
+        }
         $page->maincontentarea .= '<tr class="aceOutcomes alt">
                                     <td class="label">ACE Outcomes:</td>
-                                    <td class="value">'.implode(', ', $ace).'</td>
+                                    <td class="value">'.$ace.'</td>
                                     </tr>';
         $page->maincontentarea .= '</table>';
-        $prereqs = @$course->prerequisite;
-        if (!empty($prereqs)) {
-            $page->maincontentarea .= "<p class='prereqs'>Prereqs: {$prereqs}</p>";
+
+        if (!empty($course->prerequisite)) {
+            $page->maincontentarea .= "<p class='prereqs'>Prereqs: {$course->prerequisite}</p>";
         }
-        $notes = @$course->notes;
-        if (!empty($notes)) {
-            $page->maincontentarea .= "<p class='notes'>{$notes}</p>";
+        if (!empty($course->notes)) {
+            $page->maincontentarea .= "<p class='notes'>{$course->notes}</p>";
         }
         $page->maincontentarea .= "<p class='description'>{$course->description}</p>";
         

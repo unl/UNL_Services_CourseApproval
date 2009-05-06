@@ -42,5 +42,11 @@ class UNL_Services_CourseApproval_Listing
         // Delegate to the course
         return $this->course->$var;
     }
+    
+    function __isset($var)
+    {
+        // Delegate to the course
+        return isset($this->course->$var);
+    }
 }
 ?>

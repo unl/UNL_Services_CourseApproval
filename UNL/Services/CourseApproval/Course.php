@@ -50,6 +50,15 @@ class UNL_Services_CourseApproval_Course
         return (string)$this->_internal->$var;
     }
     
+    function __isset($var)
+    {
+        $elements = $this->_internal->xpath("default:{$var}");
+        if (count($elements)) {
+            return true;
+        }
+        return false;
+    }
+    
     function getCampuses()
     {
         return $this->getArray('campuses');
