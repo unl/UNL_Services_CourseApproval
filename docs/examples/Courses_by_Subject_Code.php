@@ -55,7 +55,7 @@ if (!isset($_GET['subject'])) {
 
 $subject = new UNL_Services_CourseApproval_SubjectArea($_GET['subject']);
 
-$page->maincontentarea .= '<h1>There are '.count($subject->courses).' courses for '.$subject.'</h1>';
+$page->maincontentarea .= '<h1>There are '.count($subject->courses).' courses for '.htmlentities($subject).'</h1>';
 
 $page->maincontentarea .=  '<dl>';
 
@@ -114,9 +114,9 @@ foreach ($subject->courses as $course) {
     
     $page->maincontentarea .= "
         <dt class='course'>
-            <span class='subjectCode'>{$subject->subject}</span>
+            <span class='subjectCode'>".htmlentities($subject->subject)."</span>
             <span class='number'>$listings</span>
-            <span class='title'>{$course->title}</span>";
+            <span class='title'>".htmlentities($course->title)."</span>";
         if (!empty($crosslistings)) {
             $page->maincontentarea .= '<span class="crosslistings">Crosslisted as '.$crosslistings.'</span>';
         }
@@ -154,12 +154,12 @@ foreach ($subject->courses as $course) {
         $page->maincontentarea .= '</table>';
 
         if (!empty($course->prerequisite)) {
-            $page->maincontentarea .= "<p class='prereqs'>Prereqs: {$course->prerequisite}</p>";
+            $page->maincontentarea .= "<p class='prereqs'>Prereqs: ".htmlentities($course->prerequisite)."</p>";
         }
         if (!empty($course->notes)) {
-            $page->maincontentarea .= "<p class='notes'>{$course->notes}</p>";
+            $page->maincontentarea .= "<p class='notes'>".htmlentities($course->notes)."</p>";
         }
-        $page->maincontentarea .= "<p class='description'>{$course->description}</p>";
+        $page->maincontentarea .= "<p class='description'>".htmlentities($course->description)."</p>";
         
     $page->maincontentarea .= "</dd>";
 }
