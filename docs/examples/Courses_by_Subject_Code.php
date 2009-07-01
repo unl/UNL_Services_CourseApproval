@@ -2,7 +2,7 @@
 chdir(dirname(dirname(dirname(__FILE__))));
 
 require_once 'UNL/Autoload.php';
-
+UNL_Templates::$options['version'] = 3;
 $page = UNL_Templates::factory('Fixed');
 
 $page->addStyleDeclaration('
