@@ -39,8 +39,8 @@ class UNL_Services_CourseApproval_Course
         if (array_key_exists($var, $this->_getMap)) {
             return $this->{$this->_getMap[$var]}();
         }
-        
-        if ($this->_internal->$var->children()) {
+        if (isset($this->_internal->$var)
+            && $this->_internal->$var->children()) {
             $string = '';
             foreach ($this->_internal->$var->children() as $el) {
                 $string .= (string)$el;

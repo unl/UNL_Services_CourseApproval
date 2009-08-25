@@ -35,7 +35,7 @@ class UNL_Services_CourseApproval_Course_Activities implements Countable, Iterat
     
     function key()
     {
-        return $this->current->type;
+        return $this->current()->type->__toString();
     }
     
     function count()

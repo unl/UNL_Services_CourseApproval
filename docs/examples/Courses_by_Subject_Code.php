@@ -38,11 +38,11 @@ $page->breadcrumbs = '<ul>
     <li>Undergraduate Bulletin</li></ul>';
 $page->navlinks = '
 <ul>
-    <li>Academic Policies</li>
-    <li>Achievement-Centered Education (ACE)</li>
-    <li>Academic Colleges</li>
-    <li>Areas of Study</li>
-    <li>Courses</li>
+    <li><a href="#">Academic Policies</a></li>
+    <li><a href="#">Achievement-Centered Education (ACE)</a></li>
+    <li><a href="#">Academic Colleges</a></li>
+    <li><a href="#">Areas of Study</a></li>
+    <li><a href="#">Courses</a></li>
 </ul>
 ';
 $page->leftRandomPromo = '';
@@ -122,23 +122,26 @@ foreach ($subject->courses as $course) {
         }
         $page->maincontentarea .= "</dt>
         <dd class='course'>";
-        $page->maincontentarea .= '<table class="details">';
+        $page->maincontentarea .= '<table class="zentable cool details">';
         $page->maincontentarea .= '<tr class="credits">
                                     <td class="label">Credit Hours:</td>
                                     <td class="value">'.$credits.'</td>
                                     </tr>';
-        $page->maincontentarea .= '<tr class="format alt">
+        $page->maincontentarea .= '<tr class="format">
                                     <td class="label">Course Format:</td>
                                     <td class="value">'.$format.'</td>
                                     </tr>';
-        $page->maincontentarea .= '<tr class="campus">
-                                    <td class="label">Campus:</td>
-                                    <td class="value">'.implode(', ', $course->campuses).'</td>
-                                    </tr>';
-        $page->maincontentarea .= '<tr class="termsOffered alt">
-                                    <td class="label">Terms Offered:</td>
-                                    <td class="value">'.implode(', ', $course->termsOffered).'</td>
-                                    </tr>';
+        if (count($course->campuses) == 1
+            && $course->campuses[0] != 'UNL') {
+            $page->maincontentarea .= '<tr class="campus">
+                                        <td class="label">Campus:</td>
+                                        <td class="value">'.implode(', ', $course->campuses).'</td>
+                                        </tr>';
+        }
+//        $page->maincontentarea .= '<tr class="termsOffered alt">
+//                                    <td class="label">Terms Offered:</td>
+//                                    <td class="value">'.implode(', ', $course->termsOffered).'</td>
+//                                    </tr>';
         $page->maincontentarea .= '<tr class="deliveryMethods">
                                     <td class="label">Course Delivery:</td>
                                     <td class="value">'.implode(', ', $course->deliveryMethods).'</td>
@@ -146,11 +149,11 @@ foreach ($subject->courses as $course) {
         $ace = '';
         if (!empty($course->aceOutcomes)) {
             $ace = implode(', ', $course->aceOutcomes);
+            $page->maincontentarea .= '<tr class="aceOutcomes">
+                                        <td class="label">ACE Outcomes:</td>
+                                        <td class="value">'.$ace.'</td>
+                                        </tr>';
         }
-        $page->maincontentarea .= '<tr class="aceOutcomes alt">
-                                    <td class="label">ACE Outcomes:</td>
-                                    <td class="value">'.$ace.'</td>
-                                    </tr>';
         $page->maincontentarea .= '</table>';
 
         if (!empty($course->prerequisite)) {
