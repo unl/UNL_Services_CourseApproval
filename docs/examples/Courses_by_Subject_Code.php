@@ -14,7 +14,7 @@ $page->addStyleDeclaration('
 
 .course .prereqs,
 .course .notes,
-.course .description {margin:4px 0;float:left;width:450px;}
+.course .description {margin:4px 0;float:left;clear:left;width:450px;}
 
 .course .prereqs {color:#0F900A;font-weight:bold;}
 .course .notes {font-style:italic;}
