@@ -127,10 +127,12 @@ foreach ($subject->courses as $course) {
                                     <td class="label">Credit Hours:</td>
                                     <td class="value">'.$credits.'</td>
                                     </tr>';
-        $page->maincontentarea .= '<tr class="format">
-                                    <td class="label">Course Format:</td>
-                                    <td class="value">'.$format.'</td>
-                                    </tr>';
+        if (!empty($format)) {
+            $page->maincontentarea .= '<tr class="format">
+                                        <td class="label">Course Format:</td>
+                                        <td class="value">'.$format.'</td>
+                                        </tr>';
+        }
         if (count($course->campuses) == 1
             && $course->campuses[0] != 'UNL') {
             $page->maincontentarea .= '<tr class="campus">

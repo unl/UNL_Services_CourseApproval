@@ -52,7 +52,6 @@ class UNL_Services_CourseApproval_Course_Credits implements Countable, ArrayAcce
                 return true;
             }
         }
-        
         return false;
     }
     

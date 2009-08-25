@@ -77,7 +77,7 @@ class UNL_Services_CourseApproval_SubjectArea_Courses implements ArrayAccess, Co
     public static function validCourseNumber($number, &$parts = null)
     {
         $matches = array();
-        if (preg_match('/^([\d]{3,4})([A-Z])?$/', $number, $matches)) {
+        if (preg_match('/^([\d]{3,4})([A-Za-z])?$/', $number, $matches)) {
             $parts['courseNumber'] = $matches[1];
             if (isset($matches[2])) {
                 $parts['courseLetter'] = $matches[2];
