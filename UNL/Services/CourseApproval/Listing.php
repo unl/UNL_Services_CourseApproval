@@ -29,12 +29,15 @@ class UNL_Services_CourseApproval_Listing
      */
     public $courseNumber;
     
-    function __construct($subject, $number)
+    public $groups = array();
+    
+    function __construct($subject, $number, $groups = array())
     {
         $this->_subjectArea = new UNL_Services_CourseApproval_SubjectArea($subject);
         $this->subjectArea  = $this->_subjectArea->subject;
         $this->course       = &$this->_subjectArea->courses[$number];
         $this->courseNumber = $number;
+        $this->groups       = $groups;
     }
     
     function __get($var)
@@ -47,6 +50,11 @@ class UNL_Services_CourseApproval_Listing
     {
         // Delegate to the course
         return isset($this->course->$var);
+    }
+
+    function hasGroups()
+    {
+        return count($this->groups)? true : false;
     }
 }
 ?>

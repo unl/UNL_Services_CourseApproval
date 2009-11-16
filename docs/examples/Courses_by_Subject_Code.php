@@ -62,8 +62,12 @@ $page->maincontentarea .=  '<dl>';
 foreach ($subject->courses as $course) {
     $listings = '';
     $crosslistings = '';
+    $groups = '';
     foreach ($course->codes as $listing) {
         if ($listing->subjectArea == $subject->subject) {
+            if ($listing->hasGroups()) {
+                $groups = implode(', ', $listing->groups);
+            }
             $listings .= $listing->courseNumber.'/';
         } else {
             $crosslistings .= '<span class="crosslisting">'.$listing->subjectArea.' '.$listing->courseNumber.'</span>, ';
@@ -155,6 +159,12 @@ foreach ($subject->courses as $course) {
                                         <td class="label">ACE Outcomes:</td>
                                         <td class="value">'.$ace.'</td>
                                         </tr>';
+        }
+        if (!empty($groups)) {
+            $page->maincontentarea .= '<tr class="groups">
+                                        <td class="label">Groups:</td>
+                                        <td class="value">'.$groups.'</td>
+                                       </tr>';
         }
         $page->maincontentarea .= '</table>';
 

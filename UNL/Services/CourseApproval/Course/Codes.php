@@ -19,7 +19,8 @@ class UNL_Services_CourseApproval_Course_Codes implements Countable, Iterator
     {
         $number = UNL_Services_CourseApproval_Course::courseNumberFromCourseCode($this->_xmlCourseCodes[$this->_currentCourseCode]);
         return new UNL_Services_CourseApproval_Listing($this->_xmlCourseCodes[$this->_currentCourseCode]->subject,
-                                                     $number);
+                                                     $number,
+                                                     UNL_Services_CourseApproval_Course::getListingGroups($this->_xmlCourseCodes[$this->_currentCourseCode]));
     }
     
     function next()

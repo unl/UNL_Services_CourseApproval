@@ -125,4 +125,13 @@ class UNL_Services_CourseApproval_Course
         }
         return $number;
     }
+
+    public static function getListingGroups(SimpleXMLElement $xml)
+    {
+        $groups = array();
+        if (isset($xml->courseGroup)) {
+            $groups = explode(',', (string)$xml->courseGroup);
+        }
+        return $groups;
+    }
 }
