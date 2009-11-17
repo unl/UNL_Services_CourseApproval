@@ -32,7 +32,7 @@ class UNL_Services_CourseApproval_SubjectArea_Groups implements Countable
         $xpath = "//default:courseGroup";
         $groups = $this->_xcri->xpath($xpath);
         foreach ($groups as $group) {
-            $this->groups[] = (string)$group;
+            $this->groups = array_merge($this->groups, explode(',', (string)$group));
         }
         $this->groups = array_unique($this->groups);
         asort($this->groups);

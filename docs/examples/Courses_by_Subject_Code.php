@@ -57,6 +57,8 @@ $subject = new UNL_Services_CourseApproval_SubjectArea($_GET['subject']);
 
 $page->maincontentarea .= '<h1>There are '.count($subject->courses).' courses for '.htmlentities($subject).'</h1>';
 
+$page->maincontentarea .= implode(', ', $subject->groups);
+
 $page->maincontentarea .=  '<dl>';
 
 foreach ($subject->courses as $course) {
