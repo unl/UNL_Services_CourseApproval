@@ -130,7 +130,7 @@ class UNL_Services_CourseApproval_Course
     {
         $groups = array();
         if (isset($xml->courseGroup)) {
-            $groups = explode(',', (string)$xml->courseGroup);
+            $groups[] = $xml->courseGroup;
         }
         return $groups;
     }
