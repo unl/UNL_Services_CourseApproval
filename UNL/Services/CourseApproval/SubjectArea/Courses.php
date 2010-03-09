@@ -58,11 +58,15 @@ class UNL_Services_CourseApproval_SubjectArea_Courses implements ArrayAccess, Co
         $xpath = "//default:courses/default:course/default:courseCodes/default:courseCode[default:subject='{$this->_subjectArea->subject}' and default:courseNumber='{$parts['courseNumber']}' and $letter_check]/parent::*/parent::*";
         $courses = $this->_xcri->xpath($xpath);
 
+        if (false === $courses) {
+            throw new Exception('No course was found matching '.$this->_subjectArea->subject.' '.$number);
+        }
+
         if (count($courses) > 1) {
             // Whoah whoah whoah, more than one course?
             throw new Exception('More than one course was found matching '.$this->_subjectArea->subject.' '.$number);
         }
-        
+
         return new UNL_Services_CourseApproval_Course($courses[0]);
     }
     
