@@ -134,4 +134,9 @@ class UNL_Services_CourseApproval_Course
         }
         return $groups;
     }
+    
+    function asXML()
+    {
+        return $this->_internal->asXML();
+    }
 }
