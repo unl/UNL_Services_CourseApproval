@@ -1,95 +1,29 @@
 <?php 
-class UNL_Services_CourseApproval_SubjectArea_Courses implements ArrayAccess, Countable, Iterator
+class UNL_Services_CourseApproval_SubjectArea_Courses extends ArrayIterator implements ArrayAccess
 {
-    /**
-     * The XCRI as a SimpleXMLElement
-     * 
-     * @var SimpleXMLElement
-     */
-    protected $_xcri;
-    
     protected $_subjectArea;
     
-    protected $_xmlCourses;
-    
-    protected $_currentXMLCourse = 0;
+    protected $_xml;
     
     function __construct(UNL_Services_CourseApproval_SubjectArea $subjectarea)
     {
         $this->_subjectArea = $subjectarea;
-        $this->_xcri = new SimpleXMLElement(UNL_Services_CourseApproval::getXCRIService()->getSubjectArea($subjectarea->subject));
-        
+        $this->_xml = new SimpleXMLElement(UNL_Services_CourseApproval::getXCRIService()->getSubjectArea($subjectarea->subject));
         //Fetch all namespaces
-        $namespaces = $this->_xcri->getNamespaces(true);
-        $this->_xcri->registerXPathNamespace('default', $namespaces['']);
+        $namespaces = $this->_xml->getNamespaces(true);
+        $this->_xml->registerXPathNamespace('default', $namespaces['']);
         
         //Register the rest with their prefixes
         foreach ($namespaces as $prefix => $ns) {
-            $this->_xcri->registerXPathNamespace($prefix, $ns);
-        }
-        
-        $this->rewind();
-    }
-    
-    function rewind()
-    {
-        $this->_xmlCourses = $this->_xcri->xpath('//default:courses/default:course');
-        $this->_currentXMLListing = 0;
-    }
-    
-    function offsetExists($number)
-    {
-        throw new Exception('Not implemented yet');
-    }
-    
-    function offsetGet($number)
-    {
-        $parts = array();
-        if (!self::validCourseNumber($number, $parts)) {
-            throw new Exception('Invalid course number format '.$number);
-        }
-        
-        if (!empty($parts['courseLetter'])) {
-            $letter_check = "default:courseLetter='{$parts['courseLetter']}'";
-        } else {
-            $letter_check = 'not(default:courseLetter)';
-        }
-        
-        $xpath = "//default:courses/default:course/default:courseCodes/default:courseCode[default:subject='{$this->_subjectArea->subject}' and default:courseNumber='{$parts['courseNumber']}' and $letter_check]/parent::*/parent::*";
-        $courses = $this->_xcri->xpath($xpath);
-
-        if (false === $courses) {
-            throw new Exception('No course was found matching '.$this->_subjectArea->subject.' '.$number);
+            $this->_xml->registerXPathNamespace($prefix, $ns);
         }
 
-        if (count($courses) > 1) {
-            // Whoah whoah whoah, more than one course?
-            throw new Exception('More than one course was found matching '.$this->_subjectArea->subject.' '.$number);
-        }
-
-        return new UNL_Services_CourseApproval_Course($courses[0]);
+        parent::__construct($this->_xml->xpath('//default:courses/default:course'));
     }
     
-    /**
-     * Verifies that the course number is in the correct format.
-     * 
-     * @param $number The course number eg 201H, 4004I
-     * @param $parts  Array of matched parts
-     * 
-     * @return bool
-     */
-    public static function validCourseNumber($number, &$parts = null)
+    function current()
     {
-        $matches = array();
-        if (preg_match('/^([\d]?[\d]{2,3})([A-Za-z])?$/', $number, $matches)) {
-            $parts['courseNumber'] = $matches[1];
-            if (isset($matches[2])) {
-                $parts['courseLetter'] = $matches[2];
-            }
-            return true;
-        }
-        
-        return false;
+        return new UNL_Services_CourseApproval_Course(parent::current());
     }
     
     function offsetSet($number, $value)
@@ -102,33 +36,37 @@ class UNL_Services_CourseApproval_SubjectArea_Courses implements ArrayAccess, Co
         throw new Exception('Not implemented yet');
     }
     
-    function count()
+    function offsetExists($number)
     {
-        return count($this->_xcri->xpath('//default:courses/default:course'));
+        throw new Exception('Not implemented yet');
     }
     
-    function current()
+    function offsetGet($number)
     {
-        return new UNL_Services_CourseApproval_Course(current($this->_xmlCourses));
-    }
-    
-    function next()
-    {
-        ++$this->_currentXMLCourse;
-        return next($this->_xmlCourses);
-    }
-    
-    function key()
-    {
-        return $this->_currentXMLCourse;
-    }
-    
-    function valid()
-    {
-        if ($this->_currentXMLCourse >= $this->count()) {
-            return false;
+        $parts = array();
+        if (!UNL_Services_CourseApproval_Course::validCourseNumber($number, $parts)) {
+            throw new Exception('Invalid course number format '.$number);
         }
-        return true;
+        
+        if (!empty($parts['courseLetter'])) {
+            $letter_check = "default:courseLetter='{$parts['courseLetter']}'";
+        } else {
+            $letter_check = 'not(default:courseLetter)';
+        }
+        
+        $xpath = "//default:courses/default:course/default:courseCodes/default:courseCode[default:subject='{$this->_subjectArea->subject}' and default:courseNumber='{$parts['courseNumber']}' and $letter_check]/parent::*/parent::*";
+        $courses = $this->_xml->xpath($xpath);
+
+        if (false === $courses) {
+            throw new Exception('No course was found matching '.$this->_subjectArea->subject.' '.$number);
+        }
+
+        if (count($courses) > 1) {
+            // Whoah whoah whoah, more than one course?
+            throw new Exception('More than one course was found matching '.$this->_subjectArea->subject.' '.$number);
+        }
+
+        return new UNL_Services_CourseApproval_Course($courses[0]);
     }
 }
 ?>

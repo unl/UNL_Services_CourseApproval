@@ -117,6 +117,28 @@ class UNL_Services_CourseApproval_Course
         return false;
     }
     
+    /**
+     * Verifies that the course number is in the correct format.
+     * 
+     * @param $number The course number eg 201H, 4004I
+     * @param $parts  Array of matched parts
+     * 
+     * @return bool
+     */
+    public static function validCourseNumber($number, &$parts = null)
+    {
+        $matches = array();
+        if (preg_match('/^([\d]?[\d]{2,3})([A-Za-z])?$/', $number, $matches)) {
+            $parts['courseNumber'] = $matches[1];
+            if (isset($matches[2])) {
+                $parts['courseLetter'] = $matches[2];
+            }
+            return true;
+        }
+        
+        return false;
+    }
+    
     public static function courseNumberFromCourseCode(SimpleXMLElement $xml)
     {
         $number = (string)$xml->courseNumber;
