@@ -157,6 +157,18 @@ class UNL_Services_CourseApproval_Course
         return $groups;
     }
     
+    function getHomeListing()
+    {
+        $home_listing = $this->_internal->xpath('default:courseCodes/default:courseCode[@type="home listing"]');
+        if (!count($home_listing)) {
+            return false;
+        }
+        $number = UNL_Services_CourseApproval_Course::courseNumberFromCourseCode($home_listing[0]);
+        return new UNL_Services_CourseApproval_Listing($home_listing[0]->subject,
+                                                     $number,
+                                                     UNL_Services_CourseApproval_Course::getListingGroups($home_listing[0]));
+    }
+    
     function asXML()
     {
         return $this->_internal->asXML();
