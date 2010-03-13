@@ -48,4 +48,16 @@ class UNL_Services_CourseApproval_Search
         $xpath = "//default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$parts['courseNumber']}' and $letter_check]/parent::*/parent::*";
         return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
     }
+    
+    public function bySubject($subject)
+    {
+        $subject = strtoupper(trim($subject));
+        if (!preg_match('/^([A-Z]{3,4})$/', $subject)) {
+            throw new Exception('Invalid subject format '.$subject);
+        }
+
+        $xpath = "//default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
+        return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
+
+    }
 }
