@@ -160,7 +160,8 @@ class UNL_Services_CourseApproval_Course
     function getHomeListing()
     {
         $home_listing = $this->_internal->xpath('default:courseCodes/default:courseCode[@type="home listing"]');
-        if (!count($home_listing)) {
+        if ($home_listing === false
+            || count($home_listing) < 1) {
             return false;
         }
         $number = UNL_Services_CourseApproval_Course::courseNumberFromCourseCode($home_listing[0]);

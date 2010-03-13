@@ -60,4 +60,13 @@ class UNL_Services_CourseApproval_Search
         return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
 
     }
+    
+    public function byTitle($title)
+    {
+        $title = trim($title);
+
+        $xpath = "//default:courses/default:course/default:title[contains(.,'$title')]//parent::*";
+        return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
+
+    }
 }
