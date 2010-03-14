@@ -45,7 +45,7 @@ class UNL_Services_CourseApproval_Search
             $letter_check = 'not(default:courseLetter)';
         }
 
-        $xpath = "//default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$parts['courseNumber']}' and $letter_check]/parent::*/parent::*";
+        $xpath = "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$parts['courseNumber']}' and $letter_check]/parent::*/parent::*";
         return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
     }
     
@@ -56,7 +56,7 @@ class UNL_Services_CourseApproval_Search
             throw new Exception('Invalid subject format '.$subject);
         }
 
-        $xpath = "//default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
+        $xpath = "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
         return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
 
     }
@@ -65,7 +65,50 @@ class UNL_Services_CourseApproval_Search
     {
         $title = trim($title);
 
-        $xpath = "//default:courses/default:course/default:title[contains(.,'$title')]//parent::*";
+        $xpath = "/default:courses/default:course/default:title[contains(.,'$title')]/parent::*";
+        return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
+
+    }
+
+    public function byAny($query)
+    {
+        
+        $xpath = '';
+
+        $query = trim($query);
+
+        $query = str_replace(array('/', '"', '\'', '*'), ' ', $query);
+
+        switch(true) {
+            case preg_match('/^([A-Z]{3,4})\s+([0-9]{2,3}[A-Z]?)$/i', $query, $matches):
+                $subject = strtoupper($matches[1]);
+                $num_parts = array();
+                UNL_Services_CourseApproval_Course::validCourseNumber($matches[2], $num_parts);
+                $letter_check = '';
+                if (!empty($num_parts['courseLetter'])) {
+                    $letter_check = " and default:courseLetter='{$num_parts['courseLetter']}'";
+                }
+                $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$num_parts['courseNumber']}'$letter_check and default:subject='$subject']/parent::*/parent::*";
+                break;
+            case preg_match('/^([0-9]{2,3}[A-Z]?)$/', $query):
+                $num_parts = array();
+                UNL_Services_CourseApproval_Course::validCourseNumber($query, $num_parts);
+
+                $letter_check = '';
+                if (!empty($num_parts['courseLetter'])) {
+                    $letter_check = " and default:courseLetter='{$num_parts['courseLetter']}'";
+                }
+
+                $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$num_parts['courseNumber']}'$letter_check]/parent::*/parent::*";
+                break;
+            case preg_match('/^([A-Z]{3,4})$/i', $query):
+                $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$query']/parent::*/parent::*";
+                break;
+            default:
+                // Do a title text search
+                $xpath .= "/default:courses/default:course/default:title[contains(.,'$query')]/parent::*";
+        }
+
         return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
 
     }
