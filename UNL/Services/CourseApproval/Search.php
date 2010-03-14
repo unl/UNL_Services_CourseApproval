@@ -79,7 +79,7 @@ class UNL_Services_CourseApproval_Search
 
         $query = str_replace(array('/', '"', '\'', '*'), ' ', $query);
 
-        switch(true) {
+        switch (true) {
             case preg_match('/^([A-Z]{3,4})\s+([0-9]{2,3}[A-Z]?)$/i', $query, $matches):
                 $subject = strtoupper($matches[1]);
                 $num_parts = array();
@@ -111,7 +111,7 @@ class UNL_Services_CourseApproval_Search
 
         $result = self::getCourses()->xpath($xpath);
 
-        if (!$result) {
+        if ($result === false) {
             $result = array();
         }
 
