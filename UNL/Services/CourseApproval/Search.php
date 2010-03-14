@@ -160,6 +160,9 @@ class UNL_Services_CourseApproval_Search
                 $subject = $query;
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
                 break;
+            case preg_match('/^ace\:(10|[1-9])$/', $query, $match):
+                $xpath .= "/default:courses/default:course/default:aceOutcomes[default:slo='{$match[1]}']/parent::*";
+                break;
             default:
                 // Do a title text search
                 $xpath .= "/default:courses/default:course/default:title[contains(.,'$query')]/parent::*";
