@@ -26,6 +26,25 @@ class UNL_Services_CourseApproval_Search
 
         return self::$courses;
     }
+
+    protected function getSubjectAreaCourses($subjectarea)
+    {
+        if (!isset(self::$courses)) {
+            $xml = UNL_Services_CourseApproval::getXCRIService()->getSubjectArea($subjectarea);
+            self::$courses = new SimpleXMLElement($xml);
+
+            //Fetch all namespaces
+            $namespaces = self::$courses->getNamespaces(true);
+            self::$courses->registerXPathNamespace('default', $namespaces['']);
+
+            //Register the rest with their prefixes
+            foreach ($namespaces as $prefix => $ns) {
+                self::$courses->registerXPathNamespace($prefix, $ns);
+            }
+        }
+
+        return self::$courses;
+    }
     
     public function setCourses(SimpleXMLElement $courses)
     {
@@ -70,7 +89,7 @@ class UNL_Services_CourseApproval_Search
 
         $xpath = "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
 
-        $result = self::getCourses()->xpath($xpath);
+        $result = self::getSubjectAreaCourses($subject)->xpath($xpath);
 
         if ($result === false) {
             $result = array();
@@ -115,6 +134,7 @@ class UNL_Services_CourseApproval_Search
 
         switch (true) {
             case preg_match('/^([A-Z]{3,4})\s+([0-9]{2,3}[A-Z]?)$/i', $query, $matches):
+                // Course subject code and number
                 $subject = strtoupper($matches[1]);
                 $num_parts = array();
                 UNL_Services_CourseApproval_Course::validCourseNumber($matches[2], $num_parts);
@@ -125,6 +145,7 @@ class UNL_Services_CourseApproval_Search
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$num_parts['courseNumber']}'$letter_check and default:subject='$subject']/parent::*/parent::*";
                 break;
             case preg_match('/^([0-9]{2,3}[A-Z]?)$/', $query):
+                // Course Number
                 $num_parts = array();
                 UNL_Services_CourseApproval_Course::validCourseNumber($query, $num_parts);
 
@@ -136,14 +157,19 @@ class UNL_Services_CourseApproval_Search
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$num_parts['courseNumber']}'$letter_check]/parent::*/parent::*";
                 break;
             case preg_match('/^([A-Z]{3,4})$/i', $query):
-                $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$query']/parent::*/parent::*";
+                $subject = strtoupper($query);
+                $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
                 break;
             default:
                 // Do a title text search
                 $xpath .= "/default:courses/default:course/default:title[contains(.,'$query')]/parent::*";
         }
 
-        $result = self::getCourses()->xpath($xpath);
+        if (isset($subject)) {
+            $result = self::getSubjectAreaCourses($subject)->xpath($xpath);
+        } else {
+            $result = self::getCourses()->xpath($xpath);
+        }
 
         if ($result === false) {
             $result = array();
