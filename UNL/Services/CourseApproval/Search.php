@@ -46,7 +46,19 @@ class UNL_Services_CourseApproval_Search
         }
 
         $xpath = "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$parts['courseNumber']}' and $letter_check]/parent::*/parent::*";
-        return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
+
+        $result = self::getCourses()->xpath($xpath);
+
+        if ($result === false) {
+            $result = array();
+        }
+
+        if (isset($limit)) {
+            $result = array_slice($result, $offset, $limit);
+        }
+
+        return new UNL_Services_CourseApproval_Courses($result);
+
     }
     
     public function bySubject($subject)
@@ -57,20 +69,42 @@ class UNL_Services_CourseApproval_Search
         }
 
         $xpath = "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
-        return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
+
+        $result = self::getCourses()->xpath($xpath);
+
+        if ($result === false) {
+            $result = array();
+        }
+
+        if (isset($limit)) {
+            $result = array_slice($result, $offset, $limit);
+        }
+
+        return new UNL_Services_CourseApproval_Courses($result);
 
     }
     
-    public function byTitle($title)
+    public function byTitle($title, $offset = 0, $limit = null)
     {
         $title = trim($title);
 
         $xpath = "/default:courses/default:course/default:title[contains(.,'$title')]/parent::*";
-        return new UNL_Services_CourseApproval_Courses(self::getCourses()->xpath($xpath));
+
+        $result = self::getCourses()->xpath($xpath);
+
+        if ($result === false) {
+            $result = array();
+        }
+
+        if (isset($limit)) {
+            $result = array_slice($result, $offset, $limit);
+        }
+
+        return new UNL_Services_CourseApproval_Courses($result);
 
     }
 
-    public function byAny($query)
+    public function byAny($query, $offset = 0, $limit = null)
     {
         
         $xpath = '';
@@ -113,6 +147,10 @@ class UNL_Services_CourseApproval_Search
 
         if ($result === false) {
             $result = array();
+        }
+
+        if (isset($limit)) {
+            $result = array_slice($result, $offset, $limit);
         }
 
         return new UNL_Services_CourseApproval_Courses($result);
