@@ -133,6 +133,13 @@ class UNL_Services_CourseApproval_Search
         $query = str_replace(array('/', '"', '\'', '*'), ' ', $query);
 
         switch (true) {
+            case preg_match('/^([A-Z]{3,4})\s+([0-9])XX$/i', $query, $matches):
+                // Course subject and number range, eg: MRKT 3XX
+                $subject = strtoupper($matches[1]);
+
+                $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[starts-with(default:courseNumber, '{$matches[2]}') and default:subject='$subject']/parent::*/parent::*";
+                echo $xpath;
+                break;
             case preg_match('/^([A-Z]{3,4})\s+([0-9]{2,3}[A-Z]?)$/i', $query, $matches):
                 // Course subject code and number
                 $subject = strtoupper($matches[1]);
