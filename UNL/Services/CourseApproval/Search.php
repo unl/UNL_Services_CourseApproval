@@ -161,7 +161,7 @@ class UNL_Services_CourseApproval_Search
                 $subject = $query;
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
                 break;
-            case preg_match('/^ace\:(10|[1-9])$/', $query, $match):
+            case preg_match('/^ace\:(10|[1-9])$/i', $query, $match):
                 // ACE outcome number
                 $xpath .= "/default:courses/default:course/default:aceOutcomes[default:slo='{$match[1]}']/parent::*";
                 break;
