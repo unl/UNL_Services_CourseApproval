@@ -105,9 +105,9 @@ class UNL_Services_CourseApproval_Search
     
     public function byTitle($title, $offset = 0, $limit = null)
     {
-        $title = trim($title);
+        $title = strtolower(trim($title));
 
-        $xpath = "/default:courses/default:course/default:title[contains(.,'$title')]/parent::*";
+        $xpath = '/default:courses/default:course/default:title[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$title.'")]/parent::*';
 
         $result = self::getCourses()->xpath($xpath);
 
@@ -157,15 +157,19 @@ class UNL_Services_CourseApproval_Search
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$num_parts['courseNumber']}'$letter_check]/parent::*/parent::*";
                 break;
             case preg_match('/^([A-Z]{3,4})$/', $query):
+                // Subject code search
                 $subject = $query;
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
                 break;
             case preg_match('/^ace\:(10|[1-9])$/', $query, $match):
+                // ACE outcome number
                 $xpath .= "/default:courses/default:course/default:aceOutcomes[default:slo='{$match[1]}']/parent::*";
                 break;
             default:
                 // Do a title text search
-                $xpath .= "/default:courses/default:course/default:title[contains(.,'$query')]/parent::*";
+                $query = strtolower($query);
+                $xpath .= '/default:courses/default:course/default:title[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$query.'")]/parent::*';
+                echo $xpath;
         }
 
         if (isset($subject)) {
