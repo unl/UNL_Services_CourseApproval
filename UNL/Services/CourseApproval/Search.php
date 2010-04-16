@@ -144,6 +144,10 @@ class UNL_Services_CourseApproval_Search
                 }
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$num_parts['courseNumber']}'$letter_check and default:subject='$subject']/parent::*/parent::*";
                 break;
+            case preg_match('/^([0-9])XX$/i', $query, $match):
+                // Course number range
+                $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '{$match[1]}')]/parent::*/parent::*/parent::*";
+                break;
             case preg_match('/^([0-9]{2,3}[A-Z]?)$/', $query):
                 // Course Number
                 $num_parts = array();
