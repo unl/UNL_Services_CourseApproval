@@ -138,7 +138,6 @@ class UNL_Services_CourseApproval_Search
                 $subject = strtoupper($matches[1]);
 
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[starts-with(default:courseNumber, '{$matches[2]}') and default:subject='$subject']/parent::*/parent::*";
-                echo $xpath;
                 break;
             case preg_match('/^([A-Z]{3,4})\s+([0-9]{2,3}[A-Z]?):?.*$/i', $query, $matches):
                 // Course subject code and number
@@ -180,7 +179,6 @@ class UNL_Services_CourseApproval_Search
                 // Do a title text search
                 $query = strtolower($query);
                 $xpath .= '/default:courses/default:course/default:title[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$query.'")]/parent::*';
-                echo $xpath;
         }
 
         if (isset($subject)) {
