@@ -139,7 +139,7 @@ class UNL_Services_CourseApproval_Search
 
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[starts-with(default:courseNumber, '{$matches[2]}') and default:subject='$subject']/parent::*/parent::*";
                 break;
-            case preg_match('/^([A-Z]{3,4})\s+([0-9]{2,3}[A-Z]?):?.*$/i', $query, $matches):
+            case preg_match('/^([A-Z]{3,4})\s+([\d]?[\d]{2,3}[A-Z]?):?.*$/i', $query, $matches):
                 // Course subject code and number
                 $subject = strtoupper($matches[1]);
                 $num_parts = array();
@@ -154,7 +154,7 @@ class UNL_Services_CourseApproval_Search
                 // Course number range
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '{$match[1]}')]/parent::*/parent::*/parent::*";
                 break;
-            case preg_match('/^([0-9]{2,3}[A-Z]?)$/', $query):
+            case preg_match('/^([\d]?[\d]{2,3})([A-Z])?$/i', $query):
                 // Course Number
                 $num_parts = array();
                 UNL_Services_CourseApproval_Course::validCourseNumber($query, $num_parts);
@@ -171,7 +171,7 @@ class UNL_Services_CourseApproval_Search
                 $subject = $query;
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
                 break;
-            case preg_match('/^ace\:(10|[1-9])$/i', $query, $match):
+            case preg_match('/^ace\s*:\s*(10|[1-9])$/i', $query, $match):
                 // ACE outcome number
                 $xpath .= "/default:courses/default:course/default:aceOutcomes[default:slo='{$match[1]}']/parent::*";
                 break;

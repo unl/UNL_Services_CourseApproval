@@ -128,10 +128,10 @@ class UNL_Services_CourseApproval_Course
     public static function validCourseNumber($number, &$parts = null)
     {
         $matches = array();
-        if (preg_match('/^([\d]?[\d]{2,3})([A-Za-z])?$/', $number, $matches)) {
+        if (preg_match('/^([\d]?[\d]{2,3})([A-Z])?$/i', $number, $matches)) {
             $parts['courseNumber'] = $matches[1];
             if (isset($matches[2])) {
-                $parts['courseLetter'] = $matches[2];
+                $parts['courseLetter'] = strtoupper($matches[2]);
             }
             return true;
         }
