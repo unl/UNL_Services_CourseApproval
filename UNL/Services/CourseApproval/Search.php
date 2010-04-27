@@ -150,7 +150,7 @@ class UNL_Services_CourseApproval_Search
                 UNL_Services_CourseApproval_Course::validCourseNumber($matches[2], $num_parts);
                 $letter_check = '';
                 if (!empty($num_parts['courseLetter'])) {
-                    $letter_check = " and default:courseLetter='{$num_parts['courseLetter']}'";
+                    $letter_check = " and (default:courseLetter='".strtoupper($num_parts['courseLetter'])."' or default:courseLetter='".strtolower($num_parts['courseLetter'])."')";
                 }
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$num_parts['courseNumber']}'$letter_check and default:subject='$subject']/parent::*/parent::*";
                 break;
@@ -165,7 +165,7 @@ class UNL_Services_CourseApproval_Search
 
                 $letter_check = '';
                 if (!empty($num_parts['courseLetter'])) {
-                    $letter_check = " and default:courseLetter='{$num_parts['courseLetter']}'";
+                    $letter_check = " and (default:courseLetter='".strtoupper($num_parts['courseLetter'])."' or default:courseLetter='".strtolower($num_parts['courseLetter'])."')";
                 }
 
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$num_parts['courseNumber']}'$letter_check]/parent::*/parent::*";
