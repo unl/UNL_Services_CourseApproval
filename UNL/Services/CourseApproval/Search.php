@@ -133,6 +133,10 @@ class UNL_Services_CourseApproval_Search
         $query = str_replace(array('/', '"', '\'', '*'), ' ', $query);
 
         switch (true) {
+            case preg_match('/^ace\s*:?\s*(10|[1-9])$/i', $query, $match):
+                // ACE outcome number
+                $xpath .= "/default:courses/default:course/default:aceOutcomes[default:slo='{$match[1]}']/parent::*";
+                break;
             case preg_match('/^([A-Z]{3,4})\s+([0-9])XX$/i', $query, $matches):
                 // Course subject and number range, eg: MRKT 3XX
                 $subject = strtoupper($matches[1]);
@@ -170,10 +174,6 @@ class UNL_Services_CourseApproval_Search
                 // Subject code search
                 $subject = $query;
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
-                break;
-            case preg_match('/^ace\s*:\s*(10|[1-9])$/i', $query, $match):
-                // ACE outcome number
-                $xpath .= "/default:courses/default:course/default:aceOutcomes[default:slo='{$match[1]}']/parent::*";
                 break;
             default:
                 // Do a title text search
