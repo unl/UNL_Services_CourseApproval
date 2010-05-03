@@ -191,11 +191,7 @@ class UNL_Services_CourseApproval_Search
             $result = array();
         }
 
-        if (isset($limit)) {
-            $result = array_slice($result, $offset, $limit);
-        }
-
-        return new UNL_Services_CourseApproval_Courses($result);
+        return new UNL_Services_CourseApproval_Search_Results($result, $offset, $limit);
 
     }
 }
