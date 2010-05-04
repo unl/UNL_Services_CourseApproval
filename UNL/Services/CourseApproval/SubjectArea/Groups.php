@@ -29,7 +29,7 @@ class UNL_Services_CourseApproval_SubjectArea_Groups implements Countable
             $this->_xcri->registerXPathNamespace($prefix, $ns);
         }
         
-        $xpath = "//default:courseGroup";
+        $xpath = "//default:subject[.='{$subjectarea->subject}']/../default:courseGroup";
         $groups = $this->_xcri->xpath($xpath);
         foreach ($groups as $group) {
             $this->groups[] = (string)$group;
