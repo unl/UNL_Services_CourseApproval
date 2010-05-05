@@ -170,9 +170,9 @@ class UNL_Services_CourseApproval_Search
 
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='{$num_parts['courseNumber']}'$letter_check]/parent::*/parent::*";
                 break;
-            case preg_match('/^([A-Z]{3,4})$/', $query):
+            case preg_match('/^([A-Z]{3,4})(\s*:\s*.*)?$/', $query, $matches):
                 // Subject code search
-                $subject = $query;
+                $subject = $matches[1];
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
                 break;
             default:
