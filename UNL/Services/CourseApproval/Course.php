@@ -39,14 +39,14 @@ class UNL_Services_CourseApproval_Course
         if (array_key_exists($var, $this->_getMap)) {
             return $this->{$this->_getMap[$var]}();
         }
+
         if (isset($this->_internal->$var)
-            && $this->_internal->$var->children()) {
-            $string = '';
-            foreach ($this->_internal->$var->children() as $el) {
-                $string .= (string)$el;
+            && count($this->_internal->$var->children())) {
+            if (isset($this->_internal->$var->div)) {
+                return str_replace(' xmlns="http://www.w3.org/1999/xhtml"', '', $this->_internal->$var->div->asXML());
             }
-            return $string;
         }
+
         return (string)$this->_internal->$var;
     }
     
