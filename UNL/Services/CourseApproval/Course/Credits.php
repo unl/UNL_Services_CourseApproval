@@ -74,4 +74,3 @@ class UNL_Services_CourseApproval_Course_Credits implements Countable, ArrayAcce
         throw new Exception('Not available.');
     }
 }
-?>

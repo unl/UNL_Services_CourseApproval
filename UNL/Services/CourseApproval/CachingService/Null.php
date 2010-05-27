@@ -13,4 +13,3 @@ class UNL_Services_CourseApproval_CachingService_Null implements UNL_Services_Co
         return true;
     }
 }
-?>

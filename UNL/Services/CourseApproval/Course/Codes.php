@@ -51,4 +51,3 @@ class UNL_Services_CourseApproval_Course_Codes implements Countable, Iterator
         return $this->current->courseNumber;
     }
 }
-?>

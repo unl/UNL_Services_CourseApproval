@@ -43,4 +43,3 @@ class UNL_Services_CourseApproval_Course_Activities implements Countable, Iterat
         return count($this->_xmlActivities);
     }
 }
-?>

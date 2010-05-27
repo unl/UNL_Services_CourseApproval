@@ -74,4 +74,3 @@ class UNL_Services_CourseApproval
         return self::$_xcri;
     }
 }
-?>

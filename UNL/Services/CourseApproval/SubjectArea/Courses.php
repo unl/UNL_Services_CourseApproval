@@ -69,4 +69,4 @@ class UNL_Services_CourseApproval_SubjectArea_Courses extends ArrayIterator impl
         return new UNL_Services_CourseApproval_Course($courses[0]);
     }
 }
-?>
+

@@ -326,4 +326,3 @@ CSCE;
         return $this->xml_header.$this->mock_data[$subjectarea].$this->xml_footer;
     }
 }
-?>

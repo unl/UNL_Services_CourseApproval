@@ -57,4 +57,3 @@ class UNL_Services_CourseApproval_Listing
         return count($this->groups)? true : false;
     }
 }
-?>

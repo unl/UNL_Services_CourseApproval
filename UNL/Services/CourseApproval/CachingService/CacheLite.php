@@ -26,4 +26,3 @@ class UNL_Services_CourseApproval_CachingService_CacheLite implements UNL_Servic
         return false;
     }
 }
-?>

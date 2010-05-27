@@ -46,4 +46,3 @@ class UNL_Services_CourseApproval_SubjectArea_Groups implements Countable
         return count($this->groups);
     }
 }
-?>

@@ -24,4 +24,3 @@ class UNL_Services_CourseApproval_SubjectArea
         return $this->subject;
     }
 }
-?>
