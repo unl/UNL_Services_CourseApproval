@@ -175,7 +175,7 @@ class UNL_Services_CourseApproval_Search
                 $subject = $matches[1];
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
                 break;
-            case preg_match('/^honors$/', $query):
+            case preg_match('/^honors$/i', $query):
                 $xpath .= "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseLetter='H']/parent::*/parent::*";
                 break;
             default:
