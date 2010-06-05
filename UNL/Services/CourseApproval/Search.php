@@ -6,44 +6,46 @@ class UNL_Services_CourseApproval_Search
      * 
      * @var SimpleXMLElement
      */
-    protected static $courses;
+    protected static $all_courses;
+    
+    protected static $courses = array();
     
     protected static function getCourses()
     {
-        if (!isset(self::$courses)) {
+        if (!isset(self::$all_courses)) {
             $xml = UNL_Services_CourseApproval::getXCRIService()->getAllCourses();
-            self::$courses = new SimpleXMLElement($xml);
+            self::$all_courses = new SimpleXMLElement($xml);
 
             //Fetch all namespaces
-            $namespaces = self::$courses->getNamespaces(true);
-            self::$courses->registerXPathNamespace('default', $namespaces['']);
+            $namespaces = self::$all_courses->getNamespaces(true);
+            self::$all_courses->registerXPathNamespace('default', $namespaces['']);
 
             //Register the rest with their prefixes
             foreach ($namespaces as $prefix => $ns) {
-                self::$courses->registerXPathNamespace($prefix, $ns);
+                self::$all_courses->registerXPathNamespace($prefix, $ns);
             }
         }
 
-        return self::$courses;
+        return self::$all_courses;
     }
 
     protected static function getSubjectAreaCourses($subjectarea)
     {
-        if (!isset(self::$courses)) {
+        if (!isset(self::$courses[$subjectarea])) {
             $xml = UNL_Services_CourseApproval::getXCRIService()->getSubjectArea($subjectarea);
-            self::$courses = new SimpleXMLElement($xml);
+            self::$courses[$subjectarea] = new SimpleXMLElement($xml);
 
             //Fetch all namespaces
-            $namespaces = self::$courses->getNamespaces(true);
-            self::$courses->registerXPathNamespace('default', $namespaces['']);
+            $namespaces = self::$courses[$subjectarea]->getNamespaces(true);
+            self::$courses[$subjectarea]->registerXPathNamespace('default', $namespaces['']);
 
             //Register the rest with their prefixes
             foreach ($namespaces as $prefix => $ns) {
-                self::$courses->registerXPathNamespace($prefix, $ns);
+                self::$courses[$subjectarea]->registerXPathNamespace($prefix, $ns);
             }
         }
 
-        return self::$courses;
+        return self::$courses[$subjectarea];
     }
     
     public function setCourses(SimpleXMLElement $courses)
