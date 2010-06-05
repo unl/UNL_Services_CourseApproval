@@ -27,7 +27,7 @@ class UNL_Services_CourseApproval_Search
         return self::$courses;
     }
 
-    protected function getSubjectAreaCourses($subjectarea)
+    protected static function getSubjectAreaCourses($subjectarea)
     {
         if (!isset(self::$courses)) {
             $xml = UNL_Services_CourseApproval::getXCRIService()->getSubjectArea($subjectarea);
