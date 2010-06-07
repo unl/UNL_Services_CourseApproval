@@ -42,4 +42,35 @@ class UNL_Services_CourseApproval_Course_Activities implements Countable, Iterat
     {
         return count($this->_xmlActivities);
     }
+
+    public static function getFullDescription($activity)
+    { 
+        switch ($activity) {
+            case 'lec':
+                return 'Lecture';
+                break;
+            case 'lab':
+                return 'Lab';
+                break;
+            case 'quz':
+                return 'Quiz';
+                break;
+            case 'rct':
+                return 'Recitation';
+                break;
+            case 'stu':
+                return 'Studio';
+                break;
+            case 'fld':
+                return 'Field';
+                break;
+            case 'ind':
+                return 'Independent Study';
+                break;
+            case 'psi':
+                return 'Personalized System of Instruction';
+                break;
+        }
+        throw new Exception('Unknown activity type! '.$activity);
+    }
 }
