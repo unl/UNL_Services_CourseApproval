@@ -19,13 +19,7 @@ abstract class UNL_Services_CourseApproval_SearchInterface
     {
         $query = $this->subjectAreaQuery($this->filterQuery($query));
 
-        $result = $this->executeQuery($query);
-
-        if ($result === false) {
-            $result = array();
-        }
-
-        return new UNL_Services_CourseApproval_Search_Results($result, $offset, $limit);
+        return $this->getQueryResult($query, $offset, $limit);
     }
 
     public function byAny($query, $offset = 0, $limit = null)
