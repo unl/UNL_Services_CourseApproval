@@ -27,7 +27,8 @@ class UNL_Services_CourseApproval_Course
         $this->_internal = $xml;
         //Fetch all namespaces
         $namespaces = $this->_internal->getNamespaces(true);
-        if ($namespaces[''] == 'http://courseapproval.unl.edu/courses') {
+        if (isset($namespaces[''])
+            && $namespaces[''] == 'http://courseapproval.unl.edu/courses') {
             $this->_internal->registerXPathNamespace('default', $namespaces['']);
             $this->ns_prefix = 'default:';
 
