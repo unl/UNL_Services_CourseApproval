@@ -19,17 +19,22 @@ class UNL_Services_CourseApproval_Course
                                'activities'      => 'getActivities',
                                'aceOutcomes'     => 'getACEOutcomes',
                                );
-    
+
+    protected $ns_prefix = '';
+
     function __construct(SimpleXMLElement $xml)
     {
         $this->_internal = $xml;
         //Fetch all namespaces
         $namespaces = $this->_internal->getNamespaces(true);
-        $this->_internal->registerXPathNamespace('default', $namespaces['']);
-        
-        //Register the rest with their prefixes
-        foreach ($namespaces as $prefix => $ns) {
-            $this->_internal->registerXPathNamespace($prefix, $ns);
+        if ($namespaces[''] == 'http://courseapproval.unl.edu/courses') {
+            $this->_internal->registerXPathNamespace('default', $namespaces['']);
+            $this->ns_prefix = 'default:';
+
+            //Register the rest with their prefixes
+            foreach ($namespaces as $prefix => $ns) {
+                $this->_internal->registerXPathNamespace($prefix, $ns);
+            }
         }
         $this->codes = new UNL_Services_CourseApproval_Course_Codes($this->_internal->courseCodes->children());
     }
@@ -52,7 +57,7 @@ class UNL_Services_CourseApproval_Course
     
     function __isset($var)
     {
-        $elements = $this->_internal->xpath("default:{$var}");
+        $elements = $this->_internal->xpath($this->ns_prefix.$var);
         if (count($elements)) {
             return true;
         }
@@ -161,7 +166,7 @@ class UNL_Services_CourseApproval_Course
     
     function getHomeListing()
     {
-        $home_listing = $this->_internal->xpath('default:courseCodes/default:courseCode[@type="home listing"]');
+        $home_listing = $this->_internal->xpath($this->ns_prefix.'courseCodes/'.$this->ns_prefix.'courseCode[@type="home listing"]');
         if ($home_listing === false
             || count($home_listing) < 1) {
             return false;
