@@ -1,12 +1,6 @@
 <?php 
 class UNL_Services_CourseApproval_Listing
 {
-    /**
-     * The course associated with this listing.
-     * 
-     * @var UNL_Services_CourseApproval_Course
-     */
-    public $course;
     
     /**
      * Internal subject area object
@@ -33,15 +27,19 @@ class UNL_Services_CourseApproval_Listing
     
     function __construct($subject, $number, $groups = array())
     {
-        $this->_subjectArea = new UNL_Services_CourseApproval_SubjectArea($subject);
-        $this->subjectArea  = $this->_subjectArea->subject;
-        $this->course       = &$this->_subjectArea->courses[$number];
+        $this->subjectArea  = $subject;
         $this->courseNumber = $number;
         $this->groups       = $groups;
     }
     
     function __get($var)
     {
+        if ($var == 'course') {
+            if (!isset($this->_subjectArea)) {
+                $this->_subjectArea = new UNL_Services_CourseApproval_SubjectArea($this->subjectArea);
+            }
+            return $this->_subjectArea->courses[$this->courseNumber];
+        }
         // Delegate to the course
         return $this->course->$var;
     }
