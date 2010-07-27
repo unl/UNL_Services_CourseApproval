@@ -58,12 +58,12 @@ class UNL_Services_CourseApproval_SubjectArea_Courses extends ArrayIterator impl
         $courses = $this->_xml->xpath($xpath);
 
         if (false === $courses) {
-            throw new Exception('No course was found matching '.$this->_subjectArea->subject.' '.$number);
+            throw new Exception('No course was found matching '.$this->_subjectArea->subject.' '.$number, 404);
         }
 
         if (count($courses) > 1) {
             // Whoah whoah whoah, more than one course?
-            throw new Exception('More than one course was found matching '.$this->_subjectArea->subject.' '.$number);
+            throw new Exception('More than one course was found matching '.$this->_subjectArea->subject.' '.$number, 500);
         }
 
         return new UNL_Services_CourseApproval_Course($courses[0]);

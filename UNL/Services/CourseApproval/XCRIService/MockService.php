@@ -320,7 +320,7 @@ CSCE;
     function getSubjectArea($subjectarea)
     {
         if (!isset($this->mock_data[$subjectarea])) {
-            throw new Exception('Could not get data.');
+            throw new Exception('Could not get data.', 500);
         }
         
         return $this->xml_header.$this->mock_data[$subjectarea].$this->xml_footer;
