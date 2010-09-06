@@ -105,7 +105,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
     {
         $letter_check = '';
         if (isset($letter)) {
-            $letter_check = " and (default:courseLetter='".strtoupper($letter)."' or default:courseLetter='".strtolower($num_parts['courseLetter'])."')";
+            $letter_check = " and (default:courseLetter='".strtoupper($letter)."' or default:courseLetter='".strtolower($letter)."')";
         }
 
         return "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='$number'$letter_check]/parent::*/parent::*";
