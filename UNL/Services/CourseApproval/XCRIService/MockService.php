@@ -151,40 +151,6 @@ ACCT;
       </courseCode>
     </courseCodes>
     <gradingType>unrestricted</gradingType>
-    <dfRemoval>false</dfRemoval>
-    <effectiveSemester>20081</effectiveSemester>
-    <prerequisite>
-      <div xmlns="http://www.w3.org/1999/xhtml">9 hrs agricultural economics and/or economics or permission.</div>
-    </prerequisite>
-    <notes>
-      <div xmlns="http://www.w3.org/1999/xhtml">Capstone course.</div>
-    </notes>
-    <description>
-      <div xmlns="http://www.w3.org/1999/xhtml">Systems approach to evaluating the effects of current domestic and international political and economic events on agricultural markets.</div>
-    </description>
-    <campuses>
-      <campus>UNL</campus>
-    </campuses>
-    <deliveryMethods>
-      <deliveryMethod>Classroom</deliveryMethod>
-    </deliveryMethods>
-    <termsOffered>
-      <term>Fall</term>
-    </termsOffered>
-    <activities/>
-    <credits>
-      <credit type="Single Value">3</credit>
-    </credits>
-  </course>
-  <course>
-    <title>Agricultural Marketing in a Multinational Environment</title>
-    <courseCodes>
-      <courseCode type="home listing">
-        <subject>AECN</subject>
-        <courseNumber>425</courseNumber>
-      </courseCode>
-    </courseCodes>
-    <gradingType>unrestricted</gradingType>
     <dfRemoval>true</dfRemoval>
     <effectiveSemester>20091</effectiveSemester>
     <prerequisite>
@@ -211,6 +177,53 @@ ACCT;
     </credits>
     <aceOutcomes>
       <slo>9</slo>
+      <slo>10</slo>
+    </aceOutcomes>
+  </course>
+  <course>
+    <title>Agricultural and Natural Resource Policy Analysis</title>
+    <courseCodes>
+      <courseCode type="home listing">
+        <subject>AECN</subject>
+        <courseNumber>445</courseNumber>
+      </courseCode>
+      <courseCode type="crosslisting">
+        <subject>NREE</subject>
+        <courseNumber>445</courseNumber>
+      </courseCode>
+    </courseCodes>
+    <gradingType>unrestricted</gradingType>
+    <dfRemoval>false</dfRemoval>
+    <effectiveSemester>20091</effectiveSemester>
+    <prerequisite>
+      <div xmlns="http://www.w3.org/1999/xhtml">ECON 211; ECON 212 or AECN 141. ECON 311 and 312 recommended.</div>
+    </prerequisite>
+    <notes>
+      <div xmlns="http://www.w3.org/1999/xhtml">Capstone course. <br/></div>
+    </notes>
+    <description>
+      <div xmlns="http://www.w3.org/1999/xhtml">Introduction to the application of economic concepts and tools to the analysis and evaluation of public policies. Economic approaches to policy evaluation derived from welfare economics. Social benefit-cost analysis described and illustrated through applications to current agricultural and natural resource policy issues.</div>
+    </description>
+    <campuses>
+      <campus>UNL</campus>
+    </campuses>
+    <deliveryMethods>
+      <deliveryMethod>Classroom</deliveryMethod>
+    </deliveryMethods>
+    <termsOffered>
+      <term>Spring</term>
+    </termsOffered>
+    <activities>
+      <activity>
+        <type>lec</type>
+        <hours>3</hours>
+      </activity>
+    </activities>
+    <credits>
+      <credit type="Single Value">3</credit>
+    </credits>
+    <aceOutcomes>
+      <slo>8</slo>
       <slo>10</slo>
     </aceOutcomes>
   </course>
@@ -310,6 +323,55 @@ AECN;
     </credits>
   </course>
 CSCE;
+        $this->mock_data['NREE'] = <<<NREE
+<course>
+    <title>Agricultural and Natural Resource Policy Analysis</title>
+    <courseCodes>
+      <courseCode type="home listing">
+        <subject>NREE</subject>
+        <courseNumber>445</courseNumber>
+      </courseCode>
+      <courseCode type="crosslisting">
+        <subject>NREE</subject>
+        <courseNumber>845</courseNumber>
+      </courseCode>
+    </courseCodes>
+    <gradingType>unrestricted</gradingType>
+    <dfRemoval>false</dfRemoval>
+    <effectiveSemester>20091</effectiveSemester>
+    <prerequisite>
+      <div xmlns="http://www.w3.org/1999/xhtml">ECON 211; ECON 212 or AECN 141. ECON 311 and 312 recommended.</div>
+    </prerequisite>
+    <notes>
+      <div xmlns="http://www.w3.org/1999/xhtml">Capstone course. <br/></div>
+    </notes>
+    <description>
+      <div xmlns="http://www.w3.org/1999/xhtml">Introduction to the application of economic concepts and tools to the analysis and evaluation of public policies. Economic approaches to policy evaluation derived from welfare economics. Social benefit-cost analysis described and illustrated through applications to current agricultural and natural resource policy issues.</div>
+    </description>
+    <campuses>
+      <campus>UNL</campus>
+    </campuses>
+    <deliveryMethods>
+      <deliveryMethod>Classroom</deliveryMethod>
+    </deliveryMethods>
+    <termsOffered>
+      <term>Spring</term>
+    </termsOffered>
+    <activities>
+      <activity>
+        <type>lec</type>
+        <hours>3</hours>
+      </activity>
+    </activities>
+    <credits>
+      <credit type="Single Value">3</credit>
+    </credits>
+    <aceOutcomes>
+      <slo>8</slo>
+      <slo>10</slo>
+    </aceOutcomes>
+  </course>
+NREE;
     }
     
     function getAllCourses()
