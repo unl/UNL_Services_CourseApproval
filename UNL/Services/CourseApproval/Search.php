@@ -52,4 +52,8 @@ class UNL_Services_CourseApproval_Search extends UNL_Services_CourseApproval_Sea
     {
         return $this->driver->numberQuery($number, $letter);
     }
+    function creditQuery($credits)
+    {
+        return $this->driver->creditQuery($credits);
+    }
 }

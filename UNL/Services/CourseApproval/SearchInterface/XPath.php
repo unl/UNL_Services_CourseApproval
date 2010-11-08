@@ -111,6 +111,10 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
         return "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='$number'$letter_check]/parent::*/parent::*";
     }
 
+    function creditQuery($credits)
+    {
+        return "/default:courses/default:course/default:courseCredits[default:credit='$credits']/parent::*/parent::*";
+    }
     
     function getQueryResult($query, $offset = 0, $limit = null)
     {
