@@ -49,7 +49,9 @@ class UNL_Services_CourseApproval_Course
         if (isset($this->_internal->$var)
             && count($this->_internal->$var->children())) {
             if (isset($this->_internal->$var->div)) {
-                return str_replace(' xmlns="http://www.w3.org/1999/xhtml"', '', $this->_internal->$var->div->asXML());
+                return str_replace(' xmlns="http://www.w3.org/1999/xhtml"', 
+                                   '',
+                                   html_entity_decode($this->_internal->$var->div->asXML()));
             }
         }
 
