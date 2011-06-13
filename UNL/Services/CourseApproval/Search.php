@@ -20,6 +20,10 @@ class UNL_Services_CourseApproval_Search extends UNL_Services_CourseApproval_Sea
     {
         return $this->driver->aceQuery($ace);
     }
+    function aceAndNumberPrefixQuery($number)
+    {
+        return $this->driver->aceAndNumberPrefixQuery($number);
+    }
     function subjectAndNumberQuery($subject, $number, $letter = null)
     {
         return $this->driver->subjectAndNumberQuery($subject, $number, $letter);

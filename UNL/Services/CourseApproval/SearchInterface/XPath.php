@@ -65,6 +65,11 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
     {
         return "/default:courses/default:course/default:aceOutcomes[default:slo='$ace']/parent::*";
     }
+
+    function aceAndNumberPrefixQuery($number)
+    {
+        return "/default:courses/default:course/default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*/default:aceOutcomes/parent::*";
+    }
     
     function subjectAndNumberPrefixQuery($subject, $number)
     {

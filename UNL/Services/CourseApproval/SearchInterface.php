@@ -39,6 +39,10 @@ abstract class UNL_Services_CourseApproval_SearchInterface
                 // Credit search
                 $query = $this->creditQuery($match[1]);
                 break;
+            case preg_match('/^ace\s*:?\s*([0-9])XX/i', $query, $matches):
+                // ACE course, and number range, eg: ACE 2XX
+                $query = $this->aceAndNumberPrefixQuery($matches[1]);
+                break;
             case preg_match('/^ace\s*:?\s*(10|[1-9])$/i', $query, $match):
                 // ACE outcome number
                 $query = $this->aceQuery($match[1]);
