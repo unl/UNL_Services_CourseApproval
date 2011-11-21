@@ -1,3 +1,5 @@
+Client API for the curriculum request system at creq.unl.edu
+
 This project provides a simple API for the course data within the creq system
 built by Tim Steiner.
 

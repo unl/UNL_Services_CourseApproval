@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
+ <name>UNL_Services_CourseApproval</name>
+ <channel>pear.unl.edu</channel>
+ <summary>Client API for the curriculum request system at creq.unl.edu
+</summary>
+ <description>
+This project provides a simple API for the course data within the creq system
+built by Tim Steiner.
+
+This project requires the UNL_Autoload package, and optionally Cache_Lite for
+caching data from the creq system.
+
+Currently data is cached on the local system in /tmp/cache_* files and stored
+for one week.
+
+See the docs/examples/ directory for examples.
+
+For information on the XML format, see the XSD -
+http://courseapproval.unl.edu/schema/courses.xsd</description>
+ <lead>
+  <name>Brett Bieber</name>
+  <user>saltybeagle</user>
+  <email>brett.bieber@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2011-11-21</date>
+ <time>16:03:33</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+ <notes>First API release
+</notes>
+ <contents>
+  <dir name="/">
+   <dir name="docs" baseinstalldir="/">
+    <dir name="examples">
+     <file role="doc" name="Courses_by_Subject_Code.php"/>
+    </dir>
+   </dir>
+   <dir name="src" baseinstalldir="/">
+    <dir name="UNL">
+     <dir name="Services">
+      <dir name="CourseApproval">
+       <dir name="CachingService">
+        <file role="php" name="CacheLite.php"/>
+        <file role="php" name="Null.php"/>
+       </dir>
+       <dir name="Course">
+        <file role="php" name="Activities.php"/>
+        <file role="php" name="Codes.php"/>
+        <file role="php" name="Credits.php"/>
+       </dir>
+       <dir name="Search">
+        <file role="php" name="Results.php"/>
+       </dir>
+       <dir name="SearchInterface">
+        <file role="php" name="XPath.php"/>
+       </dir>
+       <dir name="SubjectArea">
+        <file role="php" name="Courses.php"/>
+        <file role="php" name="Groups.php"/>
+       </dir>
+       <dir name="XCRIService">
+        <file role="php" name="creq.php"/>
+        <file role="php" name="MockService.php"/>
+       </dir>
+       <file role="php" name="CachingService.php"/>
+       <file role="php" name="College.php"/>
+       <file role="php" name="Course.php"/>
+       <file role="php" name="Courses.php"/>
+       <file role="php" name="Listing.php"/>
+       <file role="php" name="Search.php"/>
+       <file role="php" name="SearchInterface.php"/>
+       <file role="php" name="SubjectArea.php"/>
+       <file role="php" name="XCRIService.php"/>
+      </dir>
+      <file role="php" name="CourseApproval.php"/>
+     </dir>
+    </dir>
+   </dir>
+   <dir name="tests" baseinstalldir="/">
+    <file role="test" name="activities.phpt"/>
+    <file role="test" name="array_details.phpt"/>
+    <file role="test" name="credits.phpt"/>
+    <file role="test" name="dfremoval.phpt"/>
+    <file role="test" name="isset.phpt"/>
+    <file role="test" name="listing.phpt"/>
+    <file role="test" name="sample.phpt"/>
+    <file role="test" name="search.phpt"/>
+    <file role="test" name="subjects.phpt"/>
+    <file role="test" name="test_framework.php"/>
+   </dir>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>2.0.0a1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease/>
+</package>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package version="2.1" xmlns="http://pear.php.net/dtd/package-2.1" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0     http://pear.php.net/dtd/tasks-1.0.xsd     http://pear.php.net/dtd/package-2.1     http://pear.php.net/dtd/package-2.1.xsd">
+ <name>UNL_Services_CourseApproval</name>
+ <channel>pear.unl.edu</channel>
+ <summary>Client API for the curriculum request system at creq.unl.edu
+</summary>
+ <description>
+This project provides a simple API for the course data within the creq system
+built by Tim Steiner.
+
+This project requires the UNL_Autoload package, and optionally Cache_Lite for
+caching data from the creq system.
+
+Currently data is cached on the local system in /tmp/cache_* files and stored
+for one week.
+
+See the docs/examples/ directory for examples.
+
+For information on the XML format, see the XSD -
+http://courseapproval.unl.edu/schema/courses.xsd</description>
+ <lead>
+  <name>Brett Bieber</name>
+  <user>saltybeagle</user>
+  <email>brett.bieber@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2011-11-21</date>
+ <time>16:03:33</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
+ <notes>First API release
+</notes>
+ <contents>
+  <dir name="/">
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/test_framework.php"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/subjects.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/sample.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/listing.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/isset.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/dfremoval.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/credits.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/array_details.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/activities.phpt"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/XCRIService/MockService.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/XCRIService/creq.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/XCRIService.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/SubjectArea/Groups.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/SubjectArea/Courses.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/SubjectArea.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/SearchInterface/XPath.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/SearchInterface.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/Search/Results.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/Search.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/Listing.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/Courses.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/Course/Credits.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/Course/Codes.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/Course/Activities.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/Course.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/College.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/CachingService/Null.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/CachingService/CacheLite.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/CachingService.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval.php"/>
+   <file role="doc" name="doc/pear.unl.edu/UNL_Services_CourseApproval/examples/examples/Courses_by_Subject_Code.php"/>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.8</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease>
+  <filelist>
+   <install name="doc/pear.unl.edu/UNL_Services_CourseApproval/examples/examples/Courses_by_Subject_Code.php" as="UNL_Services_CourseApproval/examples/examples/Courses_by_Subject_Code.php"/>
+   <install name="php/UNL/Services/CourseApproval.php" as="UNL/Services/CourseApproval.php"/>
+   <install name="php/UNL/Services/CourseApproval/CachingService.php" as="UNL/Services/CourseApproval/CachingService.php"/>
+   <install name="php/UNL/Services/CourseApproval/CachingService/CacheLite.php" as="UNL/Services/CourseApproval/CachingService/CacheLite.php"/>
+   <install name="php/UNL/Services/CourseApproval/CachingService/Null.php" as="UNL/Services/CourseApproval/CachingService/Null.php"/>
+   <install name="php/UNL/Services/CourseApproval/College.php" as="UNL/Services/CourseApproval/College.php"/>
+   <install name="php/UNL/Services/CourseApproval/Course.php" as="UNL/Services/CourseApproval/Course.php"/>
+   <install name="php/UNL/Services/CourseApproval/Course/Activities.php" as="UNL/Services/CourseApproval/Course/Activities.php"/>
+   <install name="php/UNL/Services/CourseApproval/Course/Codes.php" as="UNL/Services/CourseApproval/Course/Codes.php"/>
+   <install name="php/UNL/Services/CourseApproval/Course/Credits.php" as="UNL/Services/CourseApproval/Course/Credits.php"/>
+   <install name="php/UNL/Services/CourseApproval/Courses.php" as="UNL/Services/CourseApproval/Courses.php"/>
+   <install name="php/UNL/Services/CourseApproval/Listing.php" as="UNL/Services/CourseApproval/Listing.php"/>
+   <install name="php/UNL/Services/CourseApproval/Search.php" as="UNL/Services/CourseApproval/Search.php"/>
+   <install name="php/UNL/Services/CourseApproval/Search/Results.php" as="UNL/Services/CourseApproval/Search/Results.php"/>
+   <install name="php/UNL/Services/CourseApproval/SearchInterface.php" as="UNL/Services/CourseApproval/SearchInterface.php"/>
+   <install name="php/UNL/Services/CourseApproval/SearchInterface/XPath.php" as="UNL/Services/CourseApproval/SearchInterface/XPath.php"/>
+   <install name="php/UNL/Services/CourseApproval/SubjectArea.php" as="UNL/Services/CourseApproval/SubjectArea.php"/>
+   <install name="php/UNL/Services/CourseApproval/SubjectArea/Courses.php" as="UNL/Services/CourseApproval/SubjectArea/Courses.php"/>
+   <install name="php/UNL/Services/CourseApproval/SubjectArea/Groups.php" as="UNL/Services/CourseApproval/SubjectArea/Groups.php"/>
+   <install name="php/UNL/Services/CourseApproval/XCRIService.php" as="UNL/Services/CourseApproval/XCRIService.php"/>
+   <install name="php/UNL/Services/CourseApproval/XCRIService/creq.php" as="UNL/Services/CourseApproval/XCRIService/creq.php"/>
+   <install name="php/UNL/Services/CourseApproval/XCRIService/MockService.php" as="UNL/Services/CourseApproval/XCRIService/MockService.php"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/activities.phpt" as="UNL_Services_CourseApproval/activities.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/array_details.phpt" as="UNL_Services_CourseApproval/array_details.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/credits.phpt" as="UNL_Services_CourseApproval/credits.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/dfremoval.phpt" as="UNL_Services_CourseApproval/dfremoval.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/isset.phpt" as="UNL_Services_CourseApproval/isset.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/listing.phpt" as="UNL_Services_CourseApproval/listing.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/sample.phpt" as="UNL_Services_CourseApproval/sample.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search.phpt" as="UNL_Services_CourseApproval/search.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/subjects.phpt" as="UNL_Services_CourseApproval/subjects.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/test_framework.php" as="UNL_Services_CourseApproval/test_framework.php"/>
+  </filelist>
+ </phprelease>
+</package>
