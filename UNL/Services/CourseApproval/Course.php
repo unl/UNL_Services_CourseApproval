@@ -8,7 +8,12 @@ class UNL_Services_CourseApproval_Course
      * @var SimpleXMLElement
      */
     protected $_internal;
-    
+
+    /**
+     * Collection of course codes
+     * 
+     * @var UNL_Services_CourseApproval_Course_Codes
+     */
     public $codes;
     
     protected $_getMap = array('credits'         => 'getCredits',
