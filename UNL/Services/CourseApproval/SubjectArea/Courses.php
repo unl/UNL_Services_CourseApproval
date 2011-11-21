@@ -57,7 +57,8 @@ class UNL_Services_CourseApproval_SubjectArea_Courses extends ArrayIterator impl
         $xpath = "//default:courses/default:course/default:courseCodes/default:courseCode[default:subject='{$this->_subjectArea->subject}' and default:courseNumber='{$parts['courseNumber']}' and $letter_check]/parent::*/parent::*";
         $courses = $this->_xml->xpath($xpath);
 
-        if (false === $courses) {
+        if (false === $courses
+            || !isset($courses[0])) {
             throw new Exception('No course was found matching '.$this->_subjectArea->subject.' '.$number, 404);
         }
 
