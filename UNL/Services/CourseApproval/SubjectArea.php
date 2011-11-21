@@ -2,7 +2,12 @@
 class UNL_Services_CourseApproval_SubjectArea
 {
     public $subject;
-    
+
+    /**
+     * Collection of courses
+     * 
+     * @var UNL_Services_CourseApproval_SubjectArea_Courses
+     */
     public $courses;
     
     /**
