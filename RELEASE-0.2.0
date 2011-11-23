@@ -1,0 +1,5 @@
+Feature Release:
+
+ * Courses now support getSubsequentCourses() (reverse-prereqs)
+ * Searching by prerequisite is required for all search drivers
+ * Add XPATH prerequisite search support
