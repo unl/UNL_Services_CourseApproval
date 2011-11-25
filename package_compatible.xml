@@ -24,10 +24,10 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2011-11-21</date>
- <time>16:03:33</time>
+ <date>2011-11-25</date>
+ <time>08:13:09</time>
  <version>
-  <release>0.1.0</release>
+  <release>0.2.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -35,11 +35,15 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>First API release
-</notes>
+ <notes>Feature Release:
+
+ * Courses now support getSubsequentCourses() (reverse-prereqs)
+ * Searching by prerequisite is required for all search drivers
+ * Add XPATH prerequisite search support</notes>
  <contents>
   <dir name="/">
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/test_framework.php"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/subsequent_courses.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/subjects.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/sample.phpt"/>
@@ -116,6 +120,7 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/sample.phpt" as="UNL_Services_CourseApproval/sample.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search.phpt" as="UNL_Services_CourseApproval/search.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/subjects.phpt" as="UNL_Services_CourseApproval/subjects.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/subsequent_courses.phpt" as="UNL_Services_CourseApproval/subsequent_courses.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/test_framework.php" as="UNL_Services_CourseApproval/test_framework.php"/>
   </filelist>
  </phprelease>
