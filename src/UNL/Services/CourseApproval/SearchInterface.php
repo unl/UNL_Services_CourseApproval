@@ -33,9 +33,9 @@ abstract class UNL_Services_CourseApproval_SearchInterface
 
     public function byPrerequisite($query, $offset = 0, $limit = null)
     {
-    	$query = $this->prerequisiteQuery($query);
+        $query = $this->prerequisiteQuery($query);
 
-    	return $this->getQueryResult($query, $offset, $limit);
+        return $this->getQueryResult($query, $offset, $limit);
     }
 
     public function byAny($query, $offset = 0, $limit = null)
