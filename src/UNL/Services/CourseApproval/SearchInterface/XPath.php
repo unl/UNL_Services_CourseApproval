@@ -259,6 +259,16 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
     }
 
     /**
+     * Combine two XPath queries into one which will return the intersect
+     *
+     * @return string
+     */
+    public function intersectQuery($query1, $query2)
+    {
+        return $query1 . '/' . $query2;
+    }
+
+    /**
      * Execute the supplied query and return matching results
      * 
      * @param string $query  XPath compatible query

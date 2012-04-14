@@ -11,6 +11,7 @@ abstract class UNL_Services_CourseApproval_SearchInterface
     abstract function numberQuery($number, $letter = null);
     abstract function creditQuery($credits);
     abstract function prerequisiteQuery($prereq);
+    abstract function intersectQuery($query1, $query2);
 
     function filterQuery($query)
     {
