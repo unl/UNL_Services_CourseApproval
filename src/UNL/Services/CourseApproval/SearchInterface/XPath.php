@@ -103,7 +103,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function aceQuery($ace)
     {
-        return self::XML_BASE . "default:aceOutcomes[default:slo='$ace']/parent::*";
+        return "default:aceOutcomes[default:slo='$ace']/parent::*";
     }
 
     /**
@@ -116,7 +116,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function aceAndNumberPrefixQuery($number)
     {
-        return self::XML_BASE . "default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*/default:aceOutcomes/parent::*";
+        return "default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*/default:aceOutcomes/parent::*";
     }
 
     /**
@@ -129,7 +129,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function subjectAndNumberPrefixQuery($subject, $number)
     {
-        return self::XML_BASE . "default:courseCodes/default:courseCode[starts-with(default:courseNumber, '$number') and default:subject='$subject']/parent::*/parent::*";
+        return "default:courseCodes/default:courseCode[starts-with(default:courseNumber, '$number') and default:subject='$subject']/parent::*/parent::*";
     }
 
     /**
@@ -141,7 +141,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function numberPrefixQuery($number)
     {
-        return self::XML_BASE . "default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*";
+        return "default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*";
     }
 
     /**
@@ -151,7 +151,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function honorsQuery()
     {
-        return self::XML_BASE . "default:courseCodes/default:courseCode[default:courseLetter='H']/parent::*/parent::*";
+        return "default:courseCodes/default:courseCode[default:courseLetter='H']/parent::*/parent::*";
     }
 
     /**
@@ -163,7 +163,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function titleQuery($title)
     {
-        return self::XML_BASE . 'default:title['.$this->caseInsensitiveXPath($title).']/parent::*';
+        return 'default:title['.$this->caseInsensitiveXPath($title).']/parent::*';
     }
 
     /**
@@ -175,7 +175,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function subjectAreaQuery($subject)
     {
-        return self::XML_BASE . "default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
+        return "default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
     }
 
     /**
@@ -189,7 +189,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function subjectAndNumberQuery($subject, $number, $letter = null)
     {
-        return self::XML_BASE . "default:courseCodes/default:courseCode[default:courseNumber='$number'{$this->courseLetterCheck($letter)} and default:subject='$subject']/parent::*/parent::*";
+        return "default:courseCodes/default:courseCode[default:courseNumber='$number'{$this->courseLetterCheck($letter)} and default:subject='$subject']/parent::*/parent::*";
     }
 
     /**
@@ -202,7 +202,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function numberQuery($number, $letter = null)
     {
-        return self::XML_BASE . "default:courseCodes/default:courseCode[default:courseNumber='$number'{$this->courseLetterCheck($letter)}]/parent::*/parent::*";
+        return "default:courseCodes/default:courseCode[default:courseNumber='$number'{$this->courseLetterCheck($letter)}]/parent::*/parent::*";
     }
 
     /**
@@ -230,7 +230,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function creditQuery($credits)
     {
-        return self::XML_BASE . "default:courseCredits[default:credit='$credits']/parent::*/parent::*";
+        return "default:courseCredits[default:credit='$credits']/parent::*/parent::*";
     }
 
     /**
@@ -242,7 +242,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function prerequisiteQuery($prereq)
     {
-        return self::XML_BASE . 'default:prerequisite['.$this->caseInsensitiveXPath($prereq).']/parent::*';
+        return 'default:prerequisite['.$this->caseInsensitiveXPath($prereq).']/parent::*';
     }
 
     /**
@@ -269,6 +269,9 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function getQueryResult($query, $offset = 0, $limit = null)
     {
+        // prepend XPath XML Base
+        $query = self::XML_BASE . $query;
+
         $result = self::getCourses()->xpath($query);
 
         if ($result === false) {
