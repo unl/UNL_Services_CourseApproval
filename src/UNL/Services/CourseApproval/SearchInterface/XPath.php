@@ -17,6 +17,8 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
 
     protected static $courses = array();
 
+    const XML_BASE = '/default:courses/default:course/';
+
     /**
      * Get all courses in a SimpleXMLElement
      * 
@@ -101,7 +103,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function aceQuery($ace)
     {
-        return "/default:courses/default:course/default:aceOutcomes[default:slo='$ace']/parent::*";
+        return self::XML_BASE . "default:aceOutcomes[default:slo='$ace']/parent::*";
     }
 
     /**
@@ -114,7 +116,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function aceAndNumberPrefixQuery($number)
     {
-        return "/default:courses/default:course/default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*/default:aceOutcomes/parent::*";
+        return self::XML_BASE . "default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*/default:aceOutcomes/parent::*";
     }
 
     /**
@@ -127,7 +129,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function subjectAndNumberPrefixQuery($subject, $number)
     {
-        return "/default:courses/default:course/default:courseCodes/default:courseCode[starts-with(default:courseNumber, '$number') and default:subject='$subject']/parent::*/parent::*";
+        return self::XML_BASE . "default:courseCodes/default:courseCode[starts-with(default:courseNumber, '$number') and default:subject='$subject']/parent::*/parent::*";
     }
 
     /**
@@ -139,7 +141,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function numberPrefixQuery($number)
     {
-        return "/default:courses/default:course/default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*";
+        return self::XML_BASE . "default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*";
     }
 
     /**
@@ -149,7 +151,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function honorsQuery()
     {
-        return "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseLetter='H']/parent::*/parent::*";
+        return self::XML_BASE . "default:courseCodes/default:courseCode[default:courseLetter='H']/parent::*/parent::*";
     }
 
     /**
@@ -162,7 +164,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
     function titleQuery($title)
     {
         $title = strtolower($title);
-        return '/default:courses/default:course/default:title[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$title.'")]/parent::*';
+        return self::XML_BASE . 'default:title[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$title.'")]/parent::*';
     }
 
     /**
@@ -174,7 +176,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function subjectAreaQuery($subject)
     {
-        return "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
+        return self::XML_BASE . "default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
     }
 
     /**
@@ -192,7 +194,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
         if (!empty($letter)) {
             $letter_check = " and (default:courseLetter='".strtoupper($letter)."' or default:courseLetter='".strtolower($letter)."')";
         }
-        return "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='$number'$letter_check and default:subject='$subject']/parent::*/parent::*";
+        return self::XML_BASE . "default:courseCodes/default:courseCode[default:courseNumber='$number'$letter_check and default:subject='$subject']/parent::*/parent::*";
     }
 
     /**
@@ -210,7 +212,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
             $letter_check = " and (default:courseLetter='".strtoupper($letter)."' or default:courseLetter='".strtolower($letter)."')";
         }
 
-        return "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='$number'$letter_check]/parent::*/parent::*";
+        return self::XML_BASE . "default:courseCodes/default:courseCode[default:courseNumber='$number'$letter_check]/parent::*/parent::*";
     }
 
     /**
@@ -222,7 +224,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function creditQuery($credits)
     {
-        return "/default:courses/default:course/default:courseCredits[default:credit='$credits']/parent::*/parent::*";
+        return self::XML_BASE . "default:courseCredits[default:credit='$credits']/parent::*/parent::*";
     }
 
     /**
@@ -235,7 +237,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
     function prerequisiteQuery($prereq)
     {
         $prereq = strtolower($prereq);
-        return '/default:courses/default:course/default:prerequisite[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$prereq.'")]/parent::*';
+        return self::XML_BASE . 'default:prerequisite[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$prereq.'")]/parent::*';
     }
 
     /**
