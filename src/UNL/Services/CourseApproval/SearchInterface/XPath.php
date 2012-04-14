@@ -1,4 +1,11 @@
 <?php
+/**
+ * 
+ * Course search driver which uses XPath queries on the course XML data
+ * 
+ * @author Brett Bieber <brett.bieber@gmail.com>
+ *
+ */
 class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_CourseApproval_SearchInterface
 {
     /**
@@ -7,9 +14,14 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      * @var SimpleXMLElement
      */
     protected static $all_courses;
-    
+
     protected static $courses = array();
-    
+
+    /**
+     * Get all courses in a SimpleXMLElement
+     * 
+     * @return SimpleXMLElement
+     */
     protected static function getCourses()
     {
         if (!isset(self::$all_courses)) {
@@ -29,6 +41,13 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
         return self::$all_courses;
     }
 
+    /**
+     * Get the XML for a specific subject area as a SimpleXMLElement
+     * 
+     * @param string $subjectarea Course subject area e.g. CSCE
+     * 
+     * @return SimpleXMLElement
+     */
     protected static function getSubjectAreaCourses($subjectarea)
     {
         if (!isset(self::$courses[$subjectarea])) {
@@ -47,7 +66,14 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
 
         return self::$courses[$subjectarea];
     }
-    
+
+    /**
+     * Utility method to trim out characters which aren't safe for XPath queries
+     * 
+     * @param string $query Search string
+     * 
+     * @return string
+     */
     function filterQuery($query)
     {
         $query = trim($query);
@@ -55,48 +81,111 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
         $query = str_replace(array('/', '"', '\'', '*'), ' ', $query);
         return $query;
     }
-    
+
+    /**
+     * Set the courses data to perform searches on
+     * 
+     * @param SimpleXMLElement $courses Set of courses to search
+     */
     public function setCourses(SimpleXMLElement $courses)
     {
         self::$courses = $courses;
     }
-    
+
+    /**
+     * Construct a query for courses matching an Achievement Centered Education (ACE) number
+     * 
+     * @param string|int $ace Achievement Centered Education (ACE) number, e.g. 1-10
+     * 
+     * @return string XPath query
+     */
     function aceQuery($ace)
     {
         return "/default:courses/default:course/default:aceOutcomes[default:slo='$ace']/parent::*";
     }
 
+    /**
+     * Construct a query for Achievement Centered Education (ACE) courses which
+     * have a course number prefix
+     * 
+     * @param string|int $number Number prefix, e.g. 1 for 100 level ACE courses
+     * 
+     * @return string XPath query
+     */
     function aceAndNumberPrefixQuery($number)
     {
         return "/default:courses/default:course/default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*/default:aceOutcomes/parent::*";
     }
-    
+
+    /**
+     * Construct a query for courses matching a subject and number prefix
+     * 
+     * @param string     $subject Subject code, e.g. CSCE
+     * @param string|int $number  Course number prefix, e.g. 2 for 200 level courses
+     * 
+     * @return string XPath query
+     */
     function subjectAndNumberPrefixQuery($subject, $number)
     {
         return "/default:courses/default:course/default:courseCodes/default:courseCode[starts-with(default:courseNumber, '$number') and default:subject='$subject']/parent::*/parent::*";
     }
-    
+
+    /**
+     * Construct a query for courses matching a number prefix
+     * 
+     * @param string|int $number  Course number prefix, e.g. 2 for 200 level courses
+     * 
+     * @return string XPath query
+     */
     function numberPrefixQuery($number)
     {
         return "/default:courses/default:course/default:courseCodes/default:courseCode/default:courseNumber[starts-with(., '$number')]/parent::*/parent::*/parent::*";
     }
-    
+
+    /**
+     * Construct a query for honors courses
+     * 
+     * @return string XPath query
+     */
     function honorsQuery()
     {
         return "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseLetter='H']/parent::*/parent::*";
     }
 
+    /**
+     * Construct a query for courses with a title matching the query
+     * 
+     * @param string $title Portion of the title of the course
+     * 
+     * @return string XPath query
+     */
     function titleQuery($title)
     {
         $title = strtolower($title);
         return '/default:courses/default:course/default:title[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$title.'")]/parent::*';
     }
-    
+
+    /**
+     * Construct a query for courses matching a subject area
+     * 
+     * @param string $subject Subject code, e.g. CSCE
+     * 
+     * @return string XPath query
+     */
     function subjectAreaQuery($subject)
     {
         return "/default:courses/default:course/default:courseCodes/default:courseCode[default:subject='$subject']/parent::*/parent::*";
     }
-    
+
+    /**
+     * Construct a query for courses matching a subject and number
+     * 
+     * @param string     $subject Subject code, e.g. CSCE
+     * @param string|int $number  Course number, e.g. 201
+     * @param string     $letter  Optional course letter, e.g. H
+     * 
+     * @return string XPath query
+     */
     function subjectAndNumberQuery($subject, $number, $letter = null)
     {
         $letter_check = '';
@@ -105,7 +194,15 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
         }
         return "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='$number'$letter_check and default:subject='$subject']/parent::*/parent::*";
     }
-    
+
+    /**
+     * Construct a query for courses matching a number
+     * 
+     * @param string|int $number Course number, e.g. 201
+     * @param string     $letter Optional course letter, e.g. H
+     * 
+     * @return string XPath query
+     */
     function numberQuery($number, $letter = null)
     {
         $letter_check = '';
@@ -116,17 +213,40 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
         return "/default:courses/default:course/default:courseCodes/default:courseCode[default:courseNumber='$number'$letter_check]/parent::*/parent::*";
     }
 
+    /**
+     * Construct a query for courses with the required number of credits
+     * 
+     * @param string|int $credits Course credits
+     * 
+     * @return string XPath query
+     */
     function creditQuery($credits)
     {
         return "/default:courses/default:course/default:courseCredits[default:credit='$credits']/parent::*/parent::*";
     }
 
-	function prerequisiteQuery($prereq)
+    /**
+     * Construct a query for courses with prerequisites matching the query
+     * 
+     * @param string $prereq Query to search prereqs for
+     * 
+     * @return string XPath query
+     */
+    function prerequisiteQuery($prereq)
     {
         $prereq = strtolower($prereq);
         return '/default:courses/default:course/default:prerequisite[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$prereq.'")]/parent::*';
     }
-    
+
+    /**
+     * Execute the supplied query and return matching results
+     * 
+     * @param string $query  XPath compatible query
+     * @param int    $offset Offset for pagination of search results
+     * @param int    $limit  Limit for the number of results returned
+     * 
+     * @return UNL_Services_CourseApproval_Search_Results
+     */
     function getQueryResult($query, $offset = 0, $limit = null)
     {
         $result = self::getCourses()->xpath($query);
