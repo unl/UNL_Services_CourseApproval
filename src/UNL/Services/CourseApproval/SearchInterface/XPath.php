@@ -246,7 +246,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
     }
 
     /**
-     * Convert a query to a case-sensitive XPath contains query
+     * Convert a query to a case-insensitive XPath contains query
      *
      * @param string $query The query to search for
      * 
