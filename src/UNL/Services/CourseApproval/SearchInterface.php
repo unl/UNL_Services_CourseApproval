@@ -17,6 +17,13 @@ abstract class UNL_Services_CourseApproval_SearchInterface
         return trim($query);
     }
 
+    public function byTitle($query, $offset = 0, $limit = null)
+    {
+        $query = $this->titleQuery($this->filterQuery($query));
+
+        return $this->getQueryResult($query, $offset, $limit);
+    }
+
     public function byNumber($query, $offset = 0, $limit = null)
     {
         $query = $this->numberQuery($this->filterQuery($query));
