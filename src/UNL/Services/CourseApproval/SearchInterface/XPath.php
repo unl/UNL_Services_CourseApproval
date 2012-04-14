@@ -163,8 +163,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function titleQuery($title)
     {
-        $title = strtolower($title);
-        return self::XML_BASE . 'default:title[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$title.'")]/parent::*';
+        return self::XML_BASE . 'default:title['.$this->caseInsensitiveXPath($title).']/parent::*';
     }
 
     /**
@@ -190,11 +189,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function subjectAndNumberQuery($subject, $number, $letter = null)
     {
-        $letter_check = '';
-        if (!empty($letter)) {
-            $letter_check = " and (default:courseLetter='".strtoupper($letter)."' or default:courseLetter='".strtolower($letter)."')";
-        }
-        return self::XML_BASE . "default:courseCodes/default:courseCode[default:courseNumber='$number'$letter_check and default:subject='$subject']/parent::*/parent::*";
+        return self::XML_BASE . "default:courseCodes/default:courseCode[default:courseNumber='$number'{$this->courseLetterCheck($letter)} and default:subject='$subject']/parent::*/parent::*";
     }
 
     /**
@@ -207,12 +202,23 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function numberQuery($number, $letter = null)
     {
+        return self::XML_BASE . "default:courseCodes/default:courseCode[default:courseNumber='$number'{$this->courseLetterCheck($letter)}]/parent::*/parent::*";
+    }
+
+    /**
+     * Construct part of an XPath query for matching a course letter
+     *
+     * @param string $letter Letter, e.g. H
+     *
+     * @return string
+     */
+    protected function courseLetterCheck($letter = null)
+    {
         $letter_check = '';
-        if (isset($letter)) {
+        if (!empty($letter)) {
             $letter_check = " and (default:courseLetter='".strtoupper($letter)."' or default:courseLetter='".strtolower($letter)."')";
         }
-
-        return self::XML_BASE . "default:courseCodes/default:courseCode[default:courseNumber='$number'$letter_check]/parent::*/parent::*";
+        return $letter_check;
     }
 
     /**
@@ -236,8 +242,20 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function prerequisiteQuery($prereq)
     {
-        $prereq = strtolower($prereq);
-        return self::XML_BASE . 'default:prerequisite[contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$prereq.'")]/parent::*';
+        return self::XML_BASE . 'default:prerequisite['.$this->caseInsensitiveXPath($prereq).']/parent::*';
+    }
+
+    /**
+     * Convert a query to a case-sensitive XPath contains query
+     *
+     * @param string $query The query to search for
+     * 
+     * @return string
+     */
+    protected function caseInsensitiveXPath($query)
+    {
+        $query = strtolower($query);
+        return 'contains(translate(.,"ABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyz"),"'.$query.'")';
     }
 
     /**
