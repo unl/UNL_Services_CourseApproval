@@ -62,6 +62,6 @@ class UNL_Services_CourseApproval_Search extends UNL_Services_CourseApproval_Sea
     }
     function prerequisiteQuery($prereq)
     {
-    	return $this->driver->prerequisiteQuery($prereq);
+        return $this->driver->prerequisiteQuery($prereq);
     }
 }
