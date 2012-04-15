@@ -24,10 +24,10 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2011-11-25</date>
- <time>08:13:09</time>
+ <date>2012-04-15</date>
+ <time>09:08:55</time>
  <version>
-  <release>0.2.0</release>
+  <release>0.3.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -35,11 +35,25 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Feature Release:
+ <notes>Feature Release!
 
- * Courses now support getSubsequentCourses() (reverse-prereqs)
- * Searching by prerequisite is required for all search drivers
- * Add XPATH prerequisite search support</notes>
+Now that graduate courses are in CREQ, some new tools for filtering out courses
+and various bug fixes.
+
+Features:
+
+* Add filters for graduate and undergraduate courses
+* Add support for searching for graduate and undergraduate courses
+* Add support for retrieving the intersection of two queries
+* Support strings of '*' or 'x' when searching for courses by number
+
+Bug fixes:
+
+* Search::byTitle() method missing
+* Searching for 497* returns no results [#1]
+* Add in missing + sign, supporting 3XX number prefix queries
+
+</notes>
  <contents>
   <dir name="/">
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/test_framework.php"/>
@@ -64,6 +78,8 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
    <file role="php" name="php/UNL/Services/CourseApproval/Search/Results.php"/>
    <file role="php" name="php/UNL/Services/CourseApproval/Search.php"/>
    <file role="php" name="php/UNL/Services/CourseApproval/Listing.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/Filter/ExcludeUndergraduateCourses.php"/>
+   <file role="php" name="php/UNL/Services/CourseApproval/Filter/ExcludeGraduateCourses.php"/>
    <file role="php" name="php/UNL/Services/CourseApproval/Courses.php"/>
    <file role="php" name="php/UNL/Services/CourseApproval/Course/Credits.php"/>
    <file role="php" name="php/UNL/Services/CourseApproval/Course/Codes.php"/>
@@ -100,6 +116,8 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
    <install name="php/UNL/Services/CourseApproval/Course/Codes.php" as="UNL/Services/CourseApproval/Course/Codes.php"/>
    <install name="php/UNL/Services/CourseApproval/Course/Credits.php" as="UNL/Services/CourseApproval/Course/Credits.php"/>
    <install name="php/UNL/Services/CourseApproval/Courses.php" as="UNL/Services/CourseApproval/Courses.php"/>
+   <install name="php/UNL/Services/CourseApproval/Filter/ExcludeGraduateCourses.php" as="UNL/Services/CourseApproval/Filter/ExcludeGraduateCourses.php"/>
+   <install name="php/UNL/Services/CourseApproval/Filter/ExcludeUndergraduateCourses.php" as="UNL/Services/CourseApproval/Filter/ExcludeUndergraduateCourses.php"/>
    <install name="php/UNL/Services/CourseApproval/Listing.php" as="UNL/Services/CourseApproval/Listing.php"/>
    <install name="php/UNL/Services/CourseApproval/Search.php" as="UNL/Services/CourseApproval/Search.php"/>
    <install name="php/UNL/Services/CourseApproval/Search/Results.php" as="UNL/Services/CourseApproval/Search/Results.php"/>
