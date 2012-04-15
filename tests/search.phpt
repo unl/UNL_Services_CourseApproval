@@ -30,6 +30,10 @@ $query = $search->intersectQuery($query1, $query2);
 $courses = $search->driver->getQueryResult($query);
 $test->assertEquals(1, count($courses), 'Intersection of two queries');
 
+$courses = $search->graduateCourses();
+$test->assertEquals(1, count($courses), 'One graduate course returned');
+
+
 ?>
 ===DONE===
 --EXPECT--

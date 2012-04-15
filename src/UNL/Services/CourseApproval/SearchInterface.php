@@ -12,6 +12,8 @@ abstract class UNL_Services_CourseApproval_SearchInterface
     abstract function creditQuery($credits);
     abstract function prerequisiteQuery($prereq);
     abstract function intersectQuery($query1, $query2);
+    abstract function graduateQuery();
+    abstract function undergraduateQuery();
 
     function filterQuery($query)
     {
@@ -42,6 +44,20 @@ abstract class UNL_Services_CourseApproval_SearchInterface
     public function byPrerequisite($query, $offset = 0, $limit = null)
     {
         $query = $this->prerequisiteQuery($query);
+
+        return $this->getQueryResult($query, $offset, $limit);
+    }
+
+    public function graduateCourses($offset = 0, $limit = null)
+    {
+        $query = $this->graduateQuery();
+
+        return $this->getQueryResult($query, $offset, $limit);
+    }
+
+    public function undergraduateCourses($offset = 0, $limit = null)
+    {
+        $query = $this->undergraduateQuery();
 
         return $this->getQueryResult($query, $offset, $limit);
     }

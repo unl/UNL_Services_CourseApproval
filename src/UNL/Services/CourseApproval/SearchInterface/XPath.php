@@ -206,6 +206,26 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
     }
 
     /**
+     * Construct a query for undergraduate courses
+     * 
+     * @return string XPath query
+     */
+    function undergraduateQuery()
+    {
+        return "default:courseCodes/default:courseCode[default:courseNumber<'500']/parent::*/parent::*";
+    }
+
+    /**
+     * Construct a query for graduate courses
+     * 
+     * @return string XPath query
+     */
+    function graduateQuery()
+    {
+        return "default:courseCodes/default:courseCode[default:courseNumber>='500']/parent::*/parent::*";
+    }
+
+    /**
      * Construct part of an XPath query for matching a course letter
      *
      * @param string $letter Letter, e.g. H
