@@ -194,10 +194,10 @@ class UNL_Services_CourseApproval_Course
      */
     function getSubsequentCourses()
     {
-    	$searcher = new UNL_Services_CourseApproval_Search();
+        $searcher = new UNL_Services_CourseApproval_Search();
 
-    	$query = $this->getHomeListing()->subjectArea.' '.$this->getHomeListing()->courseNumber;
-    	return $searcher->byPrerequisite($query);
+        $query = $this->getHomeListing()->subjectArea.' '.$this->getHomeListing()->courseNumber;
+        return $searcher->byPrerequisite($query);
     }
     
     function asXML()
