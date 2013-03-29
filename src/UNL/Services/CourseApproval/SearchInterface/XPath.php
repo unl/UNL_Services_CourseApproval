@@ -142,7 +142,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function subjectAndNumberSuffixQuery($subject, $number)
     {
-        return "default:courseCodes/default:courseCode[ends-with(default:courseNumber, '$number') and default:subject='$subject']/parent::*/parent::*";
+        return "default:courseCodes/default:courseCode[('$number' = substring(default:courseNumber,string-length(default:courseNumber)-string-length('$number')+1)) and default:subject='$subject']/parent::*/parent::*";
     }
 
     /**
@@ -166,7 +166,7 @@ class UNL_Services_CourseApproval_SearchInterface_XPath extends UNL_Services_Cou
      */
     function numberSuffixQuery($number)
     {
-        return "default:courseCodes/default:courseCode/default:courseNumber[ends-with(., '$number')]/parent::*/parent::*/parent::*";
+        return "default:courseCodes/default:courseCode/default:courseNumber['$number' = substring(., string-length(.)-string-length('$number')+1)]/parent::*/parent::*/parent::*";
     }
 
     /**
