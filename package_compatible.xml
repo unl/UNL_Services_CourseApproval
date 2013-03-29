@@ -24,10 +24,10 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2012-10-22</date>
- <time>13:13:54</time>
+ <date>2013-03-29</date>
+ <time>13:40:40</time>
  <version>
-  <release>0.3.4</release>
+  <release>0.4.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -35,9 +35,14 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Bugfix:
+ <notes>Feature Release!
 
-* Correct variable reference for course activity types</notes>
+New tools for filtering out courses
+
+Features:
+
+* Add support for searching by course number suffix. E.g. 41 for 141, 241, 341
+</notes>
  <contents>
   <dir name="/">
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/test_framework.php"/>
