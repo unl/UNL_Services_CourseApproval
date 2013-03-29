@@ -87,7 +87,7 @@ abstract class UNL_Services_CourseApproval_SearchInterface
 
                 $query = $this->subjectAndNumberPrefixQuery($subject, $matches[2]);
                 break;
-            case preg_match('/^([A-Z]{3,4})\s+(X+|\*+)?([0-9]+)$/i', $query, $matches):
+            case preg_match('/^([A-Z]{3,4})\s+(X+|\*+)([0-9]+)$/i', $query, $matches):
                 // Course subject and number suffix, eg: MUDC *41
                 $subject = strtoupper($matches[1]);
 
