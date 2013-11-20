@@ -1,7 +1,7 @@
 <?php
 abstract class UNL_Services_CourseApproval_SearchInterface
 {
-    abstract function aceQuery($ace);
+    abstract function aceQuery($ace = null);
     abstract function subjectAndNumberQuery($subject, $number, $letter = null);
     abstract function subjectAndNumberPrefixQuery($subject, $number);
     abstract function subjectAndNumberSuffixQuery($subject, $number);
@@ -72,6 +72,9 @@ abstract class UNL_Services_CourseApproval_SearchInterface
             case preg_match('/([\d]+)\scredits?/i', $query, $match):
                 // Credit search
                 $query = $this->creditQuery($match[1]);
+                break;
+            case preg_match('/^ace$/i', $query, $matches):
+                $query = $this->aceQuery();
                 break;
             case preg_match('/^ace\s*:?\s*([0-9])(X+|\*+)/i', $query, $matches):
                 // ACE course, and number range, eg: ACE 2XX
