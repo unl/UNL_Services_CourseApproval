@@ -64,7 +64,23 @@ abstract class UNL_Services_CourseApproval_SearchInterface
         return $this->getQueryResult($query, $offset, $limit);
     }
 
-    public function byAny($query, $offset = 0, $limit = -1)
+    public function byMany($queries = array(), $offset = 0, $limit = -1)
+    {
+        $query = $this->determineQuery(array_shift($queries));
+
+        foreach ($queries as $sub_query) {
+             $query = $this->intersectQuery($query, $this->determineQuery($sub_query));
+        }
+
+        return $this->getQueryResult($query, $offset, $limit);
+    }
+
+    /**
+     * Helper method to determine the appropriate query based on an input string
+     *
+     * @return string
+     */
+    public function determineQuery($query)
     {
         $query = $this->filterQuery($query);
 
@@ -132,6 +148,13 @@ abstract class UNL_Services_CourseApproval_SearchInterface
                 // Do a title text search
                 $query = $this->titleQuery($query);
         }
+
+        return $query;
+    }
+
+    public function byAny($query, $offset = 0, $limit = -1)
+    {
+        $query = $this->determineQuery($query);
 
         return $this->getQueryResult($query, $offset, $limit);
     }
