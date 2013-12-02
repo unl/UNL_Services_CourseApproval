@@ -25,9 +25,9 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <active>yes</active>
  </lead>
  <date>2013-12-02</date>
- <time>09:25:14</time>
+ <time>09:59:07</time>
  <version>
-  <release>0.5.0</release>
+  <release>0.5.1</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -40,6 +40,10 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
 Examples:
 
 * Ace 3 honors MATH
+
+Bug Fix:
+
+* PHP 5.3 compatibility
 </notes>
  <contents>
   <dir name="/">
@@ -98,6 +102,10 @@ Examples:
      <file role="test" name="ace.phpt"/>
      <file role="test" name="auto_facet.phpt"/>
      <file role="test" name="faceted_search.phpt"/>
+     <file role="test" name="honorsSearch.phpt"/>
+     <file role="test" name="numberRange.phpt"/>
+     <file role="test" name="numberSearch.phpt"/>
+     <file role="test" name="subjectAndNumberSearch.phpt"/>
     </dir>
     <file role="test" name="activities.phpt"/>
     <file role="test" name="array_details.phpt"/>

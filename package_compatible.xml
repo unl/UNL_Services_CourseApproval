@@ -25,9 +25,9 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <active>yes</active>
  </lead>
  <date>2013-12-02</date>
- <time>09:25:14</time>
+ <time>09:59:07</time>
  <version>
-  <release>0.5.0</release>
+  <release>0.5.1</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -40,12 +40,20 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
 Examples:
 
 * Ace 3 honors MATH
+
+Bug Fix:
+
+* PHP 5.3 compatibility
 </notes>
  <contents>
   <dir name="/">
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/test_framework.php"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/subsequent_courses.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/subjects.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/subjectAndNumberSearch.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/numberSearch.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/numberRange.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/honorsSearch.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/faceted_search.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/auto_facet.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/ace.phpt"/>
@@ -130,6 +138,10 @@ Examples:
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/ace.phpt" as="UNL_Services_CourseApproval/search/search/ace.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/auto_facet.phpt" as="UNL_Services_CourseApproval/search/search/auto_facet.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/faceted_search.phpt" as="UNL_Services_CourseApproval/search/search/faceted_search.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/honorsSearch.phpt" as="UNL_Services_CourseApproval/search/search/honorsSearch.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/numberRange.phpt" as="UNL_Services_CourseApproval/search/search/numberRange.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/numberSearch.phpt" as="UNL_Services_CourseApproval/search/search/numberSearch.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/subjectAndNumberSearch.phpt" as="UNL_Services_CourseApproval/search/search/subjectAndNumberSearch.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/subjects.phpt" as="UNL_Services_CourseApproval/subjects.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/subsequent_courses.phpt" as="UNL_Services_CourseApproval/subsequent_courses.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/test_framework.php" as="UNL_Services_CourseApproval/test_framework.php"/>
