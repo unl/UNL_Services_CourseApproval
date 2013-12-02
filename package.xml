@@ -24,10 +24,10 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2013-03-29</date>
- <time>13:40:40</time>
+ <date>2013-12-02</date>
+ <time>09:25:14</time>
  <version>
-  <release>0.4.0</release>
+  <release>0.5.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -35,13 +35,11 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Feature Release!
+ <notes>Add support for multiple search facets and auto-faceting of queries.
 
-New tools for filtering out courses
+Examples:
 
-Features:
-
-* Add support for searching by course number suffix. E.g. 41 for 141, 241, 341
+* Ace 3 honors MATH
 </notes>
  <contents>
   <dir name="/">
@@ -96,6 +94,11 @@ Features:
     </dir>
    </dir>
    <dir name="tests" baseinstalldir="/">
+    <dir name="search">
+     <file role="test" name="ace.phpt"/>
+     <file role="test" name="auto_facet.phpt"/>
+     <file role="test" name="faceted_search.phpt"/>
+    </dir>
     <file role="test" name="activities.phpt"/>
     <file role="test" name="array_details.phpt"/>
     <file role="test" name="credits.phpt"/>

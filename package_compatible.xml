@@ -24,10 +24,10 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <email>brett.bieber@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2013-03-29</date>
- <time>13:40:40</time>
+ <date>2013-12-02</date>
+ <time>09:25:14</time>
  <version>
-  <release>0.4.0</release>
+  <release>0.5.0</release>
   <api>0.1.0</api>
  </version>
  <stability>
@@ -35,19 +35,20 @@ http://courseapproval.unl.edu/schema/courses.xsd</description>
   <api>alpha</api>
  </stability>
  <license uri="http://www.opensource.org/licenses/bsd-license.php">New BSD License</license>
- <notes>Feature Release!
+ <notes>Add support for multiple search facets and auto-faceting of queries.
 
-New tools for filtering out courses
+Examples:
 
-Features:
-
-* Add support for searching by course number suffix. E.g. 41 for 141, 241, 341
+* Ace 3 honors MATH
 </notes>
  <contents>
   <dir name="/">
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/test_framework.php"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/subsequent_courses.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/subjects.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/faceted_search.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/auto_facet.phpt"/>
+   <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/ace.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/search.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/sample.phpt"/>
    <file role="test" name="test/pear.unl.edu/UNL_Services_CourseApproval/listing.phpt"/>
@@ -126,6 +127,9 @@ Features:
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/listing.phpt" as="UNL_Services_CourseApproval/listing.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/sample.phpt" as="UNL_Services_CourseApproval/sample.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search.phpt" as="UNL_Services_CourseApproval/search.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/ace.phpt" as="UNL_Services_CourseApproval/search/search/ace.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/auto_facet.phpt" as="UNL_Services_CourseApproval/search/search/auto_facet.phpt"/>
+   <install name="test/pear.unl.edu/UNL_Services_CourseApproval/search/search/faceted_search.phpt" as="UNL_Services_CourseApproval/search/search/faceted_search.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/subjects.phpt" as="UNL_Services_CourseApproval/subjects.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/subsequent_courses.phpt" as="UNL_Services_CourseApproval/subsequent_courses.phpt"/>
    <install name="test/pear.unl.edu/UNL_Services_CourseApproval/test_framework.php" as="UNL_Services_CourseApproval/test_framework.php"/>
