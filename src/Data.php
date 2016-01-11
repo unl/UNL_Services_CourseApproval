@@ -59,7 +59,7 @@ abstract class Data
     public static function getXCRIService()
     {
         if (!isset(static::$xcri)) {
-            static::setXCRIService(new XCRIService_Creq());
+            static::setXCRIService(new XCRIService\Creq());
         }
 
         return static::$xcri;
