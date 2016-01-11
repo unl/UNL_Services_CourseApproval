@@ -92,20 +92,15 @@ class Listing
 
     public function __get($var)
     {
-        if ('course' === $var) {
-            return $this->getCourse();
-        }
-
-        if ('subjectArea' === $var) {
-            return $this->getSubject();
-        }
-
-        if ('courseNumber' === $var) {
-            return $this->getCourseNumber();
-        }
-
-        if ('groups' === $var) {
-            return $this->getGroups();
+        switch ($var) {
+            case 'course':
+                return $this->getCourse();
+            case 'subjectArea':
+                return $this->getSubject();
+            case 'courseNumber':
+                return $this->getCourseNumber();
+            case 'groups':
+                return $this->getGroups();
         }
 
         // Delegate to the course
