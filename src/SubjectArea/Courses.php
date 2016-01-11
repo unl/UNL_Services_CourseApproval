@@ -15,7 +15,7 @@ class Courses extends \ArrayIterator
     public function __construct(SubjectArea $subjectArea)
     {
         $this->subjectArea = $subjectArea;
-        parent::__construct($subjectArea->getCourseXmlObject()->xpath(self::DEFAULT_XPATH));
+        parent::__construct($subjectArea->getCourseXmlObject()->xpath(static::DEFAULT_XPATH));
     }
 
     protected function createCourse(\SimpleXMLElement $xml)
@@ -77,14 +77,14 @@ class Courses extends \ArrayIterator
 
             $xpath = sprintf(
                 '%1$s/%2$s:courseCodes/%2$s:courseCode[%2$s:subject="%3$s" and %2$s:courseNumber="%4$s" and %5$s]/parent::*/parent::*',
-                self::DEFAULT_XPATH,
+                static::DEFAULT_XPATH,
                 Course::DEFAULT_NS,
                 $this->subjectArea->getSubject(),
                 $parts['courseNumber'],
                 $letterCheck
             );
 
-            $courses = $this->xml->xpath($xpath);
+            $courses = $this->subjectArea->getCourseXmlObject()->xpath($xpath);
             $this->offsetLookupCache[$number] = $courses;
         }
 
@@ -107,12 +107,7 @@ class Courses extends \ArrayIterator
         $courses = $this->offsetLookup($number);
 
         if (empty($courses)) {
-            throw new \Exception('No course was found matching '.$this->subjectArea->subject.' '.$number, 404);
-        }
-
-        if (count($courses) > 1) {
-            // Whoah whoah whoah, more than one course?
-            throw new \Exception('More than one course was found matching '.$this->subjectArea->subject.' '.$number, 500);
+            throw new \Exception('No course was found matching '.$this->subjectArea->getSubject().' '.$number, 404);
         }
 
         return $this->createCourse(current($courses));
