@@ -14,6 +14,8 @@ class Creq implements XCRIServiceInterface
      */
     const URL = 'http://creq.unl.edu/courses/public-view/all-courses';
 
+    protected $url;
+
     /**
      * The caching service.
      *
@@ -28,6 +30,22 @@ class Creq implements XCRIServiceInterface
     public function __construct()
     {
         $this->cache = Data::getCachingService();
+        $this->url = static::URL;
+    }
+
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    public function setUrl($url = '')
+    {
+        if (!$url) {
+            $url = static::URL;
+        }
+
+        $this->url = $url;
+        return $this;
     }
 
     /**
@@ -37,7 +55,7 @@ class Creq implements XCRIServiceInterface
      */
     public function getAllCourses()
     {
-        return $this->getData('creq_allcourses', static::URL);
+        return $this->getData('creq_allcourses', $this->url);
     }
 
     /**
@@ -49,7 +67,7 @@ class Creq implements XCRIServiceInterface
      */
     public function getSubjectArea($subjectarea)
     {
-        return $this->getData('creq_subject_'.$subjectarea, static::URL.'/subject/'.$subjectarea);
+        return $this->getData('creq_subject_'.$subjectarea, $this->getUrl().'/subject/'.$subjectarea);
     }
 
     /**
@@ -68,13 +86,11 @@ class Creq implements XCRIServiceInterface
             return $data;
         }
 
-        if ($data = file_get_contents($url)) {
-            if ($this->cache->save($key, $data)) {
-                return $data;
-            }
-            throw new Exception('Could not save data for '.$url);
+        if ($data = @file_get_contents($url)) {
+            $this->cache->save($key, $data);
+            return $data;
         }
 
-        throw new Exception('Could not get data from '.$url);
+        throw new \Exception('Could not get data from '.$url);
     }
 }
