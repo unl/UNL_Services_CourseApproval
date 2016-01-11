@@ -67,6 +67,8 @@ class Credits implements \Countable, \Iterator, \ArrayAccess
                 return (int)$credit;
             }
         }
+
+        return null;
     }
 
     /**
