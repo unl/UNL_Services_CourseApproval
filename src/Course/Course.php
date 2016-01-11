@@ -187,6 +187,7 @@ class Course
     public function setRenderListing(Listing $listing)
     {
         $this->renderListing = $listing;
+        return $this;
     }
 
     public function getRenderListing()
