@@ -45,7 +45,7 @@ class Codes extends \ArrayIterator
      */
     public function key()
     {
-        return (string) $this->current()->courseNumber;
+        return (string) $this->current()->getCourseNumber();
     }
 
     /**
