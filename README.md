@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/unl/UNL_Services_CourseApproval.svg)](https://travis-ci.org/unl/phpunltemplates)
+[![Coverage Status](https://coveralls.io/repos/unl/UNL_Services_CourseApproval/badge.svg?branch=master&service=github)](https://coveralls.io/github/unl/UNL_Services_CourseApproval?branch=master)
+
 Client API for the curriculum request system at creq.unl.edu
 
 This project provides a simple API for the course data within the creq system built by Tim Steiner.
