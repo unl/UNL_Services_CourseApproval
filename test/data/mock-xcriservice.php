@@ -98,7 +98,7 @@ $data['ACCT'] = <<<ACCT
       <courseCode type="home listing">
         <subject>ACCT</subject>
         <courseNumber>201</courseNumber>
-
+        <courseGroup>Introductory Accounting Courses</courseGroup>
       </courseCode>
     </courseCodes>
     <gradingType>letter grade only</gradingType>
@@ -146,6 +146,7 @@ $data['ACCT'] = <<<ACCT
         <subject>ACCT</subject>
         <courseNumber>201</courseNumber>
         <courseLetter>H</courseLetter>
+        <courseGroup>Introductory Accounting Courses</courseGroup>
       </courseCode>
     </courseCodes>
 
