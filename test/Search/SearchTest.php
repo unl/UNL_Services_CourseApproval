@@ -218,4 +218,28 @@ class SearchTest extends \PHPUnit_Framework_TestCase
         $courses = $this->search->getQueryResult('string(a/@b)');
         $this->assertEquals(0, count($courses));
     }
+
+    public function testWithExcludeGradFilter()
+    {
+        $courses = $this->search->byAny('AECN');
+        $courses = new \UNL\Services\CourseApproval\Filter\ExcludeGraduateCourses($courses);
+
+        $this->assertEquals(2,  iterator_count($courses));
+
+        foreach ($courses as $course) {
+            $this->assertNull($course->getSubject());
+        }
+    }
+
+    public function testWithExcludeUndergraduateFilter()
+    {
+        $courses = $this->search->byAny('AECN');
+        $courses = new \UNL\Services\CourseApproval\Filter\ExcludeUndergraduateCourses($courses);
+
+        $this->assertEquals(0,  iterator_count($courses));
+
+        foreach ($courses as $course) {
+            $this->assertNull($course->getSubject());
+        }
+    }
 }
