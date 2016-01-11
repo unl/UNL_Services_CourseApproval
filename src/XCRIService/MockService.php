@@ -24,7 +24,7 @@ class MockService implements XCRIServiceInterface
     public function getSubjectArea($subjectarea)
     {
         if (!isset($this->mockData[$subjectarea])) {
-            throw new Exception('Could not get data.', 500);
+            throw new \Exception('Could not get data.', 500);
         }
 
         return static::XML_HEADER . $this->mockData[$subjectarea] . static::XML_FOOTER;
