@@ -63,11 +63,12 @@ class Listing
         $subjectArea = new SubjectArea($subject);
 
         /* @var $course Course */
-        $course = $subjectArea->courses[$number];
+        $courses = $subjectArea->getCourses();
+        $course = $courses[$number];
 
         /* @var $candidateListing self */
-        foreach ($course->codes as $candidateListing) {
-            if ($candidateListing->subjectArea === $subject && $candidateListing->courseNumber === $number) {
+        foreach ($course->getCodes() as $candidateListing) {
+            if ($candidateListing->getSubject() === $subject && $candidateListing->getCourseNumber() === $number) {
                 return $candidateListing;
             }
         }
@@ -87,6 +88,28 @@ class Listing
         $this->courseNumber = static::getCourseNumberFromCourseCodeXml($courseCodeXml);
         $this->groups = static::getListingGroupsFromCourseCodeXml($courseCodeXml);
         $this->type = (string) $courseCodeXml['type'];
+    }
+
+    public function __get($var)
+    {
+        if ($var == 'course') {
+            return $this->_course;
+        }
+
+        // Delegate to the course
+        return $this->course->$var;
+    }
+
+    public function __isset($var)
+    {
+        // Delegate to the course
+        return isset($this->_course->$var);
+    }
+
+    public function __call($name, $arguments)
+    {
+        // Delegate to the course
+        return call_user_func_array(array($this->_course, $name), $arguments);
     }
 
     public function getCourse()
