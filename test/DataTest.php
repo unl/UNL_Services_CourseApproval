@@ -38,12 +38,15 @@ class DataTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->assertInstanceOf('UNL\Services\CourseApproval\XCRIService\Creq', Data::getXCRIService());
 		Data::getXCRIService()->setUrl();
-		$this->assertTrue(!empty(Data::getXCRIService()->getAllCourses()));
-		$this->assertTrue(!empty(Data::getXCRIService()->getSubjectArea('ACCT')));
+		$courses = Data::getXCRIService()->getAllCourses();
+		$this->assertTrue(!empty($courses));
+		$courses = Data::getXCRIService()->getSubjectArea('ACCT');
+		$this->assertTrue(!empty($courses));
 
 		Data::setXCRIService();
 		Data::setCachingService(new NullService());
-		$this->assertTrue(!empty(Data::getXCRIService()->getSubjectArea('ACCT')));
+		$courses = Data::getXCRIService()->getSubjectArea('ACCT');
+		$this->assertTrue(!empty($courses));
 	}
 
 	/**
