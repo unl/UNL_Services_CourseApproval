@@ -1,0 +1,30 @@
+{
+    "name": "unl/services-course-approval",
+    "description": "This project provides a simple API for the course data within the creq system written by Tim Steiner",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Kevin Abel (kabel)",
+            "email": "kabel2@unl.edu"
+        },
+        {
+            "name": "Brett Bieber (saltybeagle)",
+            "email": "brett.bieber@gmail.com",
+            "role": "Retired Developer"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "UNL\\Services\\CourseApproval\\": "src/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^4.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "UNLTest\\Services\\CourseApproval\\": "test/"
+        }
+    }
+}
