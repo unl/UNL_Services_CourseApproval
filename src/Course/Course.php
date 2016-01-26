@@ -63,14 +63,19 @@ class Course
             foreach ($namespaces as $prefix => $namespace) {
                 $xml->registerXPathNamespace($prefix, $namespace);
             }
+
+            return true;
         }
+
+        return false;
     }
 
     public function __construct(\SimpleXMLElement $xml)
     {
         $this->internal = $xml;
-        $this->nsPrefix = static::DEFAULT_NS_PREFIX;
-        static::registerXPathNamespaces($this->internal);
+        if (static::registerXPathNamespaces($this->internal)) {
+            $this->nsPrefix = static::DEFAULT_NS_PREFIX;
+        }
         $this->codes = new Codes($this);
     }
 

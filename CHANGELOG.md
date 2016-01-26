@@ -1,5 +1,15 @@
 # Course Approval Service Changelog
 
+## 1.0.1
+
+* Fix Course object should not set default XPath namespace if it is not registered
+
+## 1.0.0
+
+Namespaced API
+
+* General API improvements for maintainability, speed.
+
 ## 0.5.1
 
 Bug Fix:
