@@ -84,5 +84,6 @@ class SubjectAreaTest extends \PHPUnit_Framework_TestCase
 	public function testExpectExceptionFromBadSubject()
 	{
 		$subject = new SubjectArea('foo');
+		$subject->getCourses();
 	}
 }
