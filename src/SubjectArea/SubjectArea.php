@@ -30,8 +30,20 @@ class SubjectArea
     public function __construct($subject)
     {
         $this->subject = $subject;
-        $this->courses = new Courses($this);
-        $this->groups = new Groups($this);
+    }
+
+    public function __get($var)
+    {
+        switch ($var) {
+            case 'subject':
+                return $this->getSubject();
+            case 'courses':
+                return $this->getCourses();
+            case 'groups':
+                return $this->getGroups();
+            default:
+                return null;
+        }
     }
 
     /**
@@ -55,11 +67,19 @@ class SubjectArea
 
     public function getCourses()
     {
+        if (!$this->courses) {
+            $this->courses = new Courses($this);
+        }
+
         return $this->courses;
     }
 
     public function getGroups()
     {
+        if (!$this->groups) {
+            $this->groups = new Groups($this);
+        }
+
         return $this->groups;
     }
 
