@@ -1,5 +1,10 @@
 # Course Approval Service Changelog
 
+## 1.0.2
+
+* Restore backwards-compatible properties to the SubjectArea object
+* Use lazy-loading on SubjectArea getters
+
 ## 1.0.1
 
 * Fix Course object should not set default XPath namespace if it is not registered
